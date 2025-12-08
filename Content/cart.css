@@ -1,9 +1,7 @@
-﻿/* ========================
-   CART PAGE STYLES
-   ======================== */
+﻿/*  CART PAGE STYLES */
 
 .cart-page {
-    padding: 100px 20px 50px; /* top padding to avoid fixed header */
+    padding: 100px 20px 50px;
     min-height: 70vh;
     background-color: #f9f7f2;
     color: #5a7c5a;

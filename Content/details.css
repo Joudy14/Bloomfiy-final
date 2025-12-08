@@ -1,5 +1,4 @@
-﻿/* P
-/* Product Detail Specific Styles - FIXED */
+﻿/* Product Detail Specific Styles */
 .product-detail-hero {
     background: #f9f7f2;
     padding: 120px 0 30px;
@@ -333,7 +332,7 @@
         margin: 0;
     }
 
-/* Product Full Details - FIXED ABOUT SECTION */
+/* Product Full Details */
 .product-full-details {
     margin-top: 80px;
     border-top: 1px solid #f0f0f0;
@@ -360,13 +359,13 @@
     margin-bottom: 30px;
 }
 
-/* Care Guide Section - Fixed for Triangular Images */
+/* Care Guide Section */
 .care-guide-container {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 800px; /* Limit the overall width */
-    margin: 0 auto; /* Center the container */
+    max-width: 800px;
+    margin: 0 auto; 
 }
 
 .care-guide-content {
@@ -380,10 +379,10 @@
 }
 
     .care-image-full img {
-        width: auto; /* Let image keep its natural width */
-        max-width: 100%; /* Don't exceed container */
+        width: auto; 
+        max-width: 100%; 
         height: auto;
-        max-height: 350px; /* Slightly smaller max height */
+        max-height: 350px; 
         object-fit: contain;
         border-radius: 10px;
     }
@@ -408,11 +407,11 @@
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    background: #f9f7f2; /* Background for transparent areas */
+    background: #f9f7f2; 
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 400px; /* Minimum height */
+    min-height: 400px; 
 }
 
     .care-image-large:hover {
@@ -421,14 +420,14 @@
     }
 
     .care-image-large img {
-        width: auto; /* Let image keep its natural width */
-        max-width: 100%; /* Don't exceed container */
-        height: auto; /* Let image keep its natural height */
-        max-height: 400px; /* Limit maximum height */
-        object-fit: contain; /* Maintain aspect ratio */
+        width: auto; 
+        max-width: 100%;
+        height: auto; 
+        max-height: 400px; 
+        object-fit: contain; 
         display: block;
         transition: transform 0.5s ease;
-        padding: 20px; /* Space around image */
+        padding: 20px; 
     }
 
     .care-image-large:hover img {

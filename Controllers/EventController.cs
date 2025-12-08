@@ -8,7 +8,7 @@ namespace Bloomfiy.Controllers
 {
     public class EventController : Controller
     {
-        // GET: Event
+       
         public ActionResult Services()
         {
             return View();

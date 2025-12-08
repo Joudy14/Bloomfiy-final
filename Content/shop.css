@@ -63,7 +63,7 @@
 
 
 
-/* Fix for product card height and button visibility */
+/*  product card height and button visibility */
 .product-card {
     height: 500px !important;
 }
@@ -81,7 +81,7 @@
     min-height: 50px !important;
 }
 
-/* Ensure Load More is properly positioned */
+
 .load-more-container {
     margin-top: 60px !important;
     padding-top: 40px !important;
@@ -235,7 +235,7 @@
     margin-bottom: 50px;
 }
 
-/* Product Card - FIXED VISIBILITY */
+/* Product Card */
 .product-card {
     background: white;
     border-radius: 15px;
@@ -244,10 +244,10 @@
     transition: all 0.3s ease;
     border: 1px solid #f0f0f0;
     position: relative;
-    height: 500px; /* Slightly increased */
+    height: 500px; 
     display: flex;
     flex-direction: column;
-    cursor: pointer; /* Add pointer cursor for whole card */
+    cursor: pointer; 
 }
 
     .product-card:hover {
@@ -356,14 +356,14 @@
         background: #8b7355;
     }
 
-/* Product Info - FIXED: NOW VISIBLE! */
+/* Product Info  */
 .product-info {
     padding: 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
     background: white;
-    min-height: 250px; /* Ensure enough space for content */
+    min-height: 250px; 
 }
 
 .product-title {
@@ -384,7 +384,7 @@
     display: block;
     overflow: visible;
     flex: none;
-    min-height: 2.8em; /* Fixed height for description */
+    min-height: 2.8em; 
 }
 
 /* Color Selection in Catalog */
@@ -397,7 +397,7 @@
 .color-option-preview {
     cursor: pointer;
     position: relative;
-    z-index: 10; /* Higher z-index to be above card click */
+    z-index: 10; 
 }
 
 
@@ -430,7 +430,7 @@
     border-radius: 50%;
 }
 
-/* Product Price - FIXED: NOW VISIBLE! */
+/* Product Price  */
 .product-price {
     display: flex;
     align-items: center;
@@ -453,7 +453,7 @@
     text-decoration: line-through;
 }
 
-/* Hide features in catalog */
+
 .product-features {
     display: none;
 }
@@ -472,16 +472,16 @@
     background: #5a7c5a;
     color: white;
     border: none;
-    padding: 15px; /* Increased padding */
+    padding: 15px;
     border-radius: 8px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1rem; /* Slightly larger font */
+    font-size: 1rem; 
     margin-top: auto;
     visibility: visible;
     opacity: 1;
-    min-height: 50px; /* Minimum height */
+    min-height: 50px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -492,7 +492,7 @@
         transform: translateY(-2px);
     }
 
-/* Load More - FIXED POSITION */
+/* Load More */
 .load-more-container {
     text-align: center;
     margin-top: 80px;

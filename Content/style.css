@@ -97,7 +97,7 @@ header nav ul {
         header nav ul li a {
             text-transform: uppercase;
             color: #8b7355;
-            font-size: 16px; /* Bigger font */
+            font-size: 16px; 
             font-weight: 500;
             text-decoration: none;
             transition: color 0.3s;
@@ -124,7 +124,7 @@ header nav ul {
 .action-icon {
     color: #8b7355;
     text-decoration: none;
-    font-size: 20px; /* Bigger icons */
+    font-size: 20px; 
     transition: color 0.3s;
     position: relative;
     display: flex;
@@ -144,8 +144,8 @@ header nav ul {
 /* Fixed Counter Position */
 .cart-count, .wishlist-count {
     position: absolute;
-    top: 5px; /* Fixed position */
-    right: 5px; /* Fixed position */
+    top: 5px; 
+    right: 5px; 
     background: #5a7c5a;
     color: white;
     border-radius: 50%;
@@ -163,7 +163,7 @@ header nav ul {
 .login-btn {
     background: #5a7c5a;
     color: white;
-    padding: 10px 20px; /* Better proportions */
+    padding: 10px 20px; 
     border-radius: 25px;
     text-decoration: none;
     font-size: 14px;
@@ -172,7 +172,7 @@ header nav ul {
     white-space: nowrap;
     border: none;
     cursor: pointer;
-    height: 40px; /* Fixed height */
+    height: 40px; 
     display: flex;
     align-items: center;
     line-height: 1;
@@ -185,7 +185,7 @@ header nav ul {
         transform: translateY(-1px);
     }
 
-/* Mobile Menu Button (for later) */
+/* Mobile Menu Button  */
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -356,7 +356,7 @@ header nav ul {
     width: 100%;
     display: block;
     position: relative;
-    margin-top: 7.6rem; /*  Õ  «·ÂÌœ— */
+    margin-top: 7.6rem; 
 }
 
     #header-hero .header-bg {
@@ -387,7 +387,7 @@ header nav ul {
         margin-top: 4.6rem;
     }
 
-        /* «·‰’ ›Êﬁ «·⁄‰Ê«‰ */
+     
         #header-hero .header-content p.heading-1 {
             text-transform: uppercase;
             margin: 0 auto;
@@ -398,7 +398,7 @@ header nav ul {
             letter-spacing: 3px;
         }
 
-        /* «·⁄‰Ê«‰ «·—∆Ì”Ì */
+    
         #header-hero .header-content h1 {
             margin: 0 auto;
             font-size: 4.5rem;
@@ -426,7 +426,7 @@ header nav ul {
     }
 }
 
-/* «·Ê’›  Õ  «·⁄‰Ê«‰ */
+
 #header-hero .header-content p.description {
     margin: 0 auto;
     width: 50%;
@@ -437,7 +437,7 @@ header nav ul {
     font-style: italic;
 }
 
-/* “— Pick Your Flowers */
+
 #header-hero .header-content .button {
     margin-top: 3.6rem;
     background-color: transparent;
@@ -466,10 +466,10 @@ header nav ul {
     }
 
 
-/* Button Container *
 
 
-/* Sections */
+
+
 .section {
     padding: 80px 0;
 }
@@ -522,6 +522,8 @@ header nav ul {
     height: auto;
     border-radius: 5px;
 }
+
+
 /* Events Section ñ Home */
 #events {
     background: url('/Images/eventbg.jpg') center center/cover no-repeat;
@@ -545,7 +547,7 @@ header nav ul {
         z-index: 1;
     }
 
-    /* ⁄‰Ê«‰ Ê Ê’› «·ﬁ”„ */
+
     #events .products-header {
         text-align: center;
         margin-bottom: 40px;
@@ -566,7 +568,7 @@ header nav ul {
             margin-bottom: 3rem;
         }
 
-/* «·ﬂ—Ê  */
+
 .events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -846,8 +848,7 @@ footer {
 
 
 
-/*/////////CONTACT Us////
-///////////////////////////*/
+/*  CONTACT US    */
 
 #contact-section {
   background-color: #f9f7f2;
@@ -954,7 +955,7 @@ opacity: 0.9;
     position: relative;
 }
 
-/*subtle overlay to soften the image */
+
 #contact-section::before {
   content: "";
   position: absolute;
@@ -1004,11 +1005,8 @@ opacity: 0.9;
 
 
 
-/* ========================
-   ABOUT PAGE SPECIFIC STYLES
-   ======================== */
+/*  ABOUT PAGE SPECIFIC STYLES */
 
-/* About Page Main Container */
 .about {
     margin-bottom: 0; 
 }
@@ -1307,7 +1305,7 @@ opacity: 0.9;
 }
 
 
-/* Team Section - Fixed Layout */
+
 .about .team-grid {
     display: grid !important;
     grid-template-columns: repeat(5, 1fr) !important;
@@ -1365,7 +1363,6 @@ opacity: 0.9;
     margin-top: 10px !important;
 }
 
-/* Responsive for smaller screens */
 @media (max-width: 1200px) {
     .about .team-grid {
         grid-template-columns: repeat(3, 1fr) !important;
@@ -1422,19 +1419,19 @@ opacity: 0.9;
     
  }
 
-/* ===== GENERAL PAGE LAYOUT ===== */
+/*  GENERAL PAGE LAYOUT  */
 
 .page-wrapper {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 80px; /* Ì„‰⁄ «·«· ’«ﬁ »«·ÂÌœ— */
+    padding-top: 80px; 
     padding-bottom: 40px;
     background: #f5f6fa;
 }
 
-/* ===== FORM CONTAINER ===== */
+/*  FORM CONTAINER  */
 
 .form-container {
     width: 100%;
@@ -1446,7 +1443,7 @@ opacity: 0.9;
     border: 1px solid #eee;
 }
 
-    /* ===== TITLES ===== */
+    /*  TITLES */
 
     .form-container h2 {
         text-align: center;
@@ -1455,7 +1452,7 @@ opacity: 0.9;
         font-weight: 600;
     }
 
-/* ===== INPUTS ===== */
+/*  INPUTS */
 
 .form-group {
     margin-bottom: 15px;
@@ -1483,7 +1480,7 @@ opacity: 0.9;
             outline: none;
         }
 
-/* ===== BUTTON ===== */
+/*  BUTTON  */
 
 .btn-submit {
     width: 100%;
@@ -1502,7 +1499,7 @@ opacity: 0.9;
         background: #584df2;
     }
 
-/* ===== LINKS ===== */
+/*  LINKS */
 
 .form-links {
     text-align: center;
