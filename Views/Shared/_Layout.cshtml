@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Bloomfiy</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/faq.css">
+    <link rel="stylesheet" href="~/Content/DeliveryInfo.css">
+    <link rel="stylesheet" href="~/Content/Privacy.css">
+    <link rel="stylesheet" href="~/Content/terms.css">
+    <link rel="stylesheet" href="~/Content/refund.css">
+    <link rel="stylesheet" href="~/Content/blog.css">
+    <link rel="stylesheet" href="~/Content/event.css">
+    <link rel="stylesheet" href="~/Content/shop.css">
+    <link rel="stylesheet" href="~/Content/details.css">
+    <link rel="stylesheet" href="~/Content/Profile.css">
+
+    @if (ViewBag.IncludeCartCss != null && ViewBag.IncludeCartCss)
+    {
+        <link rel="stylesheet" href="~/Content/cart.css" />
+    }
+
+
+
+
+
+
+
+</head>
+
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav id="nav">
+            <!-- Logo as Link to Home -->
+            <div class="logo nav-common">
+                <a href="@Url.Action("Index", "Home")" class="logo-link">
+                    <img src="~/Images/webName.png" alt="Bloomfiy" class="webname-img">
+                </a>
+            </div>
+
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn">☰</button>
+
+            <ul class="nav-common">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                <li>@Html.ActionLink("Shop", "Catalog", "Product")</li>
+                <li>@Html.ActionLink("Events", "Services", "Event")</li>
+                <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+
+            <!-- User Actions - Right Side -->
+            @* Hidden logout form outside HTML structure *@
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                }
+            }
+
+            <div class="user-actions">
+
+                <!-- Wishlist -->
+                <a href="@Url.Action("Index", "Wishlist")" class="action-icon wishlist-icon" title="Wishlist">
+                    ♡ <span class="wishlist-count">0</span>
+                </a>
+
+                <!-- Cart -->
+                <a href="@Url.Action("Index", "Cart")" class="action-icon cart-icon" title="Cart">
+                    🛒 <span class="cart-count">0</span>
+                </a>
+
+                @if (Request.IsAuthenticated)
+                {
+                    <!-- Account -->
+                    <a href="@Url.Action("Index", "Manage")" class="action-icon" title="My Account">👤</a>
+
+                    <!-- Logout triggers hidden form -->
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="action-icon" title="Logout">⎋</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")" class="action-icon" title="Login">Login</a>
+                    <a href="@Url.Action("Register", "Account")" class="action-icon" title="Register">Register</a>
+                }
+
+            </div>
+
+
+
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                        <li>@Html.ActionLink("Events", "Services", "Event")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Policies</h3>
+                    <ul>
+                        <li>@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Information")</li>
+                        <li>@Html.ActionLink("Terms of Service", "TermsOfService", "Information")</li>
+                        <li>@Html.ActionLink("Delivery Information", "DeliveryInfo", "Information")</li>
+                        <li>@Html.ActionLink("Refund Policy", "RefundPolicy", "Information")</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Subscribe</h3>
+                    <p>Get updates on new arrivals and special offers</p>
+                    <div class="subscribe-form">
+                        <input type="email" placeholder="Your email address">
+                        <button class="subscribe-btn">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; @DateTime.Now.Year Bloomfiy Flower Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <!-- Your custom JavaScript -->
+    <script src="~/Scripts/script.js"></script>
+    <script src="~/Scripts/faq.js"></script>
+    <script src="~/Scripts/DeliveryInfo.js"></script>
+    <script src="~/Scripts/privacy.js"></script>
+    <script src="~/Scripts/terms.js"></script>
+    <script src="~/Scripts/refund.js"></script>
+    <script src="~/Scripts/blog.js"></script>
+    <script src="~/Scripts/event.js"></script>
+    <script src="~/Scripts/shop.js"></script>
+    <script src="~/Scripts/detail.js"></script>
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

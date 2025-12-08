@@ -1,0 +1,37 @@
+﻿@model Bloomfiy_final.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="profile-edit-container">
+    <h2>Login</h2>
+
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "profile-edit-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <label>Email</label>
+        @Html.TextBoxFor(m => m.Email, new { @class = "input-field", placeholder = "Enter your email" })
+
+        <label>Password</label>
+        @Html.PasswordFor(m => m.Password, new { @class = "input-field", placeholder = "Enter your password" })
+
+        <label style="margin-top:10px;">
+            @Html.CheckBoxFor(m => m.RememberMe) Remember me
+        </label>
+
+        <button type="submit" class="save-btn">Log in</button>
+
+        <p style="margin-top:15px;">
+            @Html.ActionLink("Register as a new user", "Register", "Account")
+        </p>
+    }
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

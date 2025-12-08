@@ -1,0 +1,34 @@
+﻿@model Bloomfiy_final.Models.IndexViewModel
+@{
+    ViewBag.Title = "My Account";
+}
+
+<div class="manage-container">
+
+    <h2 class="manage-title">My Account</h2>
+
+    @if (TempData["StatusMessage"] != null)
+    {
+        <p class="status-message">@TempData["StatusMessage"]</p>
+    }
+
+    <div class="section-card">
+        <h3>Your Details</h3>
+
+        <p><strong>First Name:</strong> @Model.FirstName</p>
+        <p><strong>Last Name:</strong> @Model.LastName</p>
+        <p><strong>Address:</strong> @Model.Address</p>
+        <p><strong>Phone:</strong> @Model.PhoneNumber</p>
+
+        <a href="@Url.Action("EditProfile", "Manage")" class="btn-green">Edit Profile</a>
+    </div>
+
+
+    <div class="section-card" style="margin-top:30px;">
+        <h3>Security</h3>
+
+        <p><strong>Password</strong></p>
+        <a href="@Url.Action("ChangePassword", "Manage")" class="btn-green">Change Password</a>
+    </div>
+
+</div>

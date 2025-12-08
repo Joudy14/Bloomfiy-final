@@ -1,0 +1,35 @@
+﻿@model Bloomfiy_final.Models.EditProfileViewModel
+@{
+    ViewBag.Title = "Edit Profile";
+}
+
+<div class="profile-edit-container">
+    <h2>Edit Your Profile</h2>
+
+    @using (Html.BeginForm("EditProfile", "Manage", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="profile-edit-form">
+
+    <label>First Name</label>
+    @Html.TextBoxFor(m => m.FirstName, new { @class = "input-field" })
+    @Html.ValidationMessageFor(m => m.FirstName)
+
+    <label>Last Name</label>
+    @Html.TextBoxFor(m => m.LastName, new { @class = "input-field" })
+    @Html.ValidationMessageFor(m => m.LastName)
+
+    <label>Address</label>
+    @Html.TextBoxFor(m => m.Address, new { @class = "input-field" })
+    @Html.ValidationMessageFor(m => m.Address)
+
+    <label>Phone Number</label>
+    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input-field", placeholder = "Enter your phone" })
+
+
+    <button type="submit" class="save-btn">Save Changes</button>
+</div>
+    }
+</div>
+

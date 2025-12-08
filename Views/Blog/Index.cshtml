@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Blog - Floral Inspiration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="blog-hero">
+    <div class="container">
+        <h1>Floral Inspiration & Tips</h1>
+        <p>Simple guides to help you enjoy beautiful flowers longer</p>
+    </div>
+</section>
+
+<section class="blog-posts">
+    <div class="container">
+        <div class="posts-grid">
+            <!-- Post 1 -->
+            <article class="post-card">
+                <img src="~/Images/blog/spring-care.jpg" alt="Spring Flower Care">
+                <div class="post-content">
+                    <h3>Spring Flower Care Guide</h3>
+                    <p>Learn how to care for your spring flowers to ensure they stay vibrant and beautiful...</p>
+                    <a href="@Url.Action("Post", "Blog", new { id = 1 })" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="post-card">
+                <img src="~/Images/blog/rose-care.jpg" alt="Rose Care">
+                <div class="post-content">
+                    <h3>Rose Care Basics</h3>
+                    <p>Everything you need to know about growing and caring for beautiful roses...</p>
+                    <a href="@Url.Action("Post", "Blog", new { id = 2 })" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="post-card">
+                <img src="~/Images/blog/wedding-bouquets.jpg" alt="Wedding Bouquets">
+                <div class="post-content">
+                    <h3>Wedding Bouquet Ideas</h3>
+                    <p>Discover beautiful wedding bouquet ideas that will make your special day unforgettable...</p>
+                    <a href="@Url.Action("Post", "Blog", new { id = 3 })" class="read-more">Read More</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
