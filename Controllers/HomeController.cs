@@ -3,12 +3,12 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Bloomfiy.Models;
+using Bloomfiy_final.Models;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Text;
 
-namespace Bloomfiy.Controllers
+namespace Bloomfiy_final.Controllers
 {
     public class HomeController : Controller
     {

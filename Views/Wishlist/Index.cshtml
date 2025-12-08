@@ -1,0 +1,44 @@
+﻿﻿@model List<Bloomfiy.Models.WishlistItem>
+
+@{
+    ViewBag.Title = "Wishlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.IncludeWishlistCss = true;
+}
+
+<section class="Wishlist-page container">
+    <h2>Your Wishlist</h2>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="Wishlist-empty">
+            Your wishlist is empty.
+        </div>
+    }
+    else
+    {
+        <div class="Wishlist-grid">
+            @foreach (var item in Model)
+            {
+                <div class="Wishlist-card">
+                    <img src="@item.ImageUrl" class="Wishlist-image" />
+
+                    <h3>@item.Name</h3>
+                    <p class="Wishlist-price">$@item.Price</p>
+
+                    @if (!string.IsNullOrEmpty(item.Color))
+                    {
+                        <p class="Wishlist-color">Color: @item.Color</p>
+                    }
+
+                    @using (Html.BeginForm("Remove", "Wishlist", FormMethod.Post))
+                    {
+                        @Html.Hidden("id", item.ProductId)
+                        @Html.Hidden("color", item.Color)
+                        <button class="btn Wishlist-remove-btn">Remove</button>
+                    }
+                </div>
+            }
+        </div>
+    }
+</section>

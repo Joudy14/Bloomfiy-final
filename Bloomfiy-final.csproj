@@ -171,7 +171,6 @@
     <Compile Include="Controllers\Admin\AdminCatagoryController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Admin\AdminProductController.cs" />
-    <Compile Include="Controllers\Admin\DashboardController.cs" />
     <Compile Include="Controllers\Admin\EventsController.cs" />
     <Compile Include="Controllers\Admin\OrdersController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -224,6 +223,10 @@
     <Compile Include="Migrations\202512052001138_AddPhoneNumberToProfile.Designer.cs">
       <DependentUpon>202512052001138_AddPhoneNumberToProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202512082157377_InitialBloomfiySetup.cs" />
+    <Compile Include="Migrations\202512082157377_InitialBloomfiySetup.Designer.cs">
+      <DependentUpon>202512082157377_InitialBloomfiySetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -244,10 +247,17 @@
     <Content Include="Images\bahar.png" />
     <Content Include="Images\blog1pic.jpg" />
     <Content Include="Images\blog2pic.jpg" />
+    <Content Include="Images\blog\rose-care.jpg" />
+    <Content Include="Images\blog\spring-care.jpg" />
+    <Content Include="Images\blog\wedding-bouquets.jpg" />
     <Content Include="Images\blommpic1.jpg" />
     <Content Include="Images\eco.jpg" />
     <Content Include="Images\event.jpg" />
     <Content Include="Images\eventbg.jpg" />
+    <Content Include="Images\eventmainbg.jpg" />
+    <Content Include="Images\events\celebration.jpg" />
+    <Content Include="Images\events\corporate.jpg" />
+    <Content Include="Images\events\wedding.jpg" />
     <Content Include="Images\fresh.jpg" />
     <Content Include="Images\joud.png" />
     <Content Include="Images\layan.png" />
@@ -270,6 +280,7 @@
     <Content Include="Images\products_img\peony\peony_white.png" />
     <Content Include="Images\sara-iovino-iouHI5jIKKI-unsplash.jpg" />
     <Content Include="Images\webName.png" />
+    <Compile Include="Models\WishlistItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -291,10 +302,9 @@
     <Content Include="Content\shop.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\terms.css" />
-    <Content Include="Controllers\CartController.txt" />
     <Content Include="Controllers\CheckoutController.txt" />
     <Content Include="Controllers\OrderController.txt" />
-    <Content Include="Controllers\WishlistController.txt" />
+    <Compile Include="Controllers\WishlistController.cs" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -379,7 +389,6 @@
     <Content Include="Views\Admin\AdminProduct\Edit.cshtml" />
     <Content Include="Views\Admin\AdminProduct\Index.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Checkout\OrderComplete.cshtml" />
     <Content Include="Views\Checkout\OrderReview.cshtml" />
@@ -399,15 +408,15 @@
     <Content Include="Views\Product\Catalog.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Manage\EditProfile.cshtml" />
-    <Content Include="Views\Admin\Dashboard.cshtml" />
-    <Content Include="Views\Iamhere.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Wishlist\Index.cshtml" />
+    <Content Include="Views\Blog\Post1.cshtml" />
+    <Content Include="Views\Blog\Post2.cshtml" />
+    <Content Include="Views\Blog\Post3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Dashboard\" />
-    <Folder Include="Views\Events\" />
     <Folder Include="Views\Orders\" />
-    <Folder Include="Views\Wishlist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -434,6 +443,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512052001138_AddPhoneNumberToProfile.resx">
       <DependentUpon>202512052001138_AddPhoneNumberToProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512082157377_InitialBloomfiySetup.resx">
+      <DependentUpon>202512082157377_InitialBloomfiySetup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

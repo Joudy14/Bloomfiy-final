@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Bloomfiy.Models;
+using Bloomfiy_final.Models;
 
-namespace Bloomfiy.Controllers
+namespace Bloomfiy_final.Controllers
 {
     public class CartController : Controller
     {
@@ -12,7 +12,7 @@ namespace Bloomfiy.Controllers
         public ActionResult Index()
         {
             System.Diagnostics.Debug.WriteLine("CartController.Index hit!");
-            var cart = Session["Bloomfiy.Cart"] as List<Bloomfiy.Models.CartItem> ?? new List<Bloomfiy.Models.CartItem>();
+            var cart = Session["Bloomfiy.Cart"] as List<Bloomfiy_final.Models.CartItem> ?? new List<Bloomfiy_final.Models.CartItem>();
             return View(cart);
         }
 

@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Rose Care Basics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="post-header">
+    <div class="container">
+        <h1>Rose Care Basics</h1>
+        <div class="post-meta">
+            <span>April 5, 2024</span> •
+            <span>6 min read</span>
+        </div>
+    </div>
+</section>
+
+<section class="post-content">
+    <div class="container">
+        <img src="~/Images/blog/rose-care.jpg" alt="Rose Care" class="post-image">
+
+        <div class="post-body">
+            <p>Roses are timeless, elegant, and one of the most loved flowers in the world. With proper care, your roses can bloom beautifully and stay healthy year-round.</p>
+
+            <h2>Watering Roses</h2>
+            <p>Roses prefer deep, consistent watering at the base of the plant. Avoid wetting the leaves, especially in the evening, to prevent fungal issues.</p>
+
+            <h2>Sunlight Requirements</h2>
+            <p>Roses thrive in full sunlight. Aim for at least 6 hours of direct sunlight each day to encourage healthy growth and vibrant blooms.</p>
+
+            <h2>Maintenance Tips</h2>
+            <ul>
+                <li>Prune dead or weak stems regularly</li>
+                <li>Fertilize during the growing season</li>
+                <li>Remove faded flowers to encourage new blooms</li>
+                <li>Watch for pests like aphids and treat early</li>
+            </ul>
+
+            <p>With the right attention, your roses will reward you with stunning, fragrant blossoms throughout the season.</p>
+        </div>
+
+        <div class="post-navigation">
+            <a href="@Url.Action("Index", "Blog")" class="back-to-blog">← Back to Blog</a>
+        </div>
+    </div>
+</section>

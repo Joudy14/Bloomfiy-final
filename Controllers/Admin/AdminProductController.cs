@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Bloomfiy.Models;
+using Bloomfiy_final.Models;
 using System.Data.Entity;
 
-namespace Bloomfiy.Controllers
+namespace Bloomfiy_final.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdminProductController : Controller

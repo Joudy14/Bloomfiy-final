@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-namespace Bloomfiy.Models
+namespace Bloomfiy_final.Models
 {
     public class CartItem
     {

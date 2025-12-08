@@ -1,20 +1,21 @@
-﻿/*  CART PAGE STYLES */
-
+﻿﻿ /* ========================
+   CART PAGE STYLES
+   ======================== */
 .cart-page {
-    padding: 100px 20px 50px;
+    padding: 150px 20px 70px;
     min-height: 70vh;
     background-color: #f9f7f2;
     color: #5a7c5a;
     font-family: 'Georgia', 'Times New Roman', serif;
 }
 
-    .cart-page h2 {
-        font-size: 2.5rem;
-        text-align: center;
-        margin-bottom: 40px;
-        color: #8b7355;
-        font-style: italic;
-    }
+.cart-page h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #8b7355;
+    font-style: italic;
+}
 
 .cart-empty {
     text-align: center;

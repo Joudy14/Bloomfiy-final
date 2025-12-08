@@ -1,5 +1,5 @@
-﻿@model Bloomfiy.Models.Product
-@{
+﻿@model Bloomfiy_final.Models.Product
+@
     ViewBag.Title = "Delete Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -234,14 +234,14 @@
 
 @section Scripts {
     <script>
-    $(document).ready(function() {
- 
-        $('form').submit(function(e) {
-            if (!confirm('⚠️ WARNING: This will permanently delete the product and all its data.\n\nAre you absolutely sure?')) {
-                e.preventDefault();
-                return false;
-            }
+        $(document).ready(function () {
+
+            $('form').submit(function (e) {
+                if (!confirm('⚠️ WARNING: This will permanently delete the product and all its data.\n\nAre you absolutely sure?')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
         });
-    });
     </script>
 }>

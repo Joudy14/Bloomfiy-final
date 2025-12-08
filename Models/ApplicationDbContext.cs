@@ -1,44 +1,46 @@
-﻿// Models/ApplicationDbContext.cs
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace Bloomfiy.Models
+namespace Bloomfiy_final.Models
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext() : base("BloomfiyConnection")
+        public ApplicationDbContext()
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
-            // Optional: Disable lazy loading for better performance
-            // this.Configuration.LazyLoadingEnabled = false;
-
         }
-        // DbSet properties for each entity
+
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
+
         public DbSet<Product> Products { get; set; }
-        public DbSet<Categories> Categories { get; set; }
         public DbSet<Color> Colors { get; set; }
+        public DbSet<Categories> Categories { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Remove pluralizing table names (optional)
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            // Configure relationships if needed
-            // ProductColor has composite key (optional)
             modelBuilder.Entity<ProductColor>()
                 .HasKey(pc => pc.Id);
 
             modelBuilder.Entity<ProductColor>()
                 .HasRequired(pc => pc.Product)
                 .WithMany(p => p.ProductColors)
-                .HasForeignKey(pc => pc.ProductId);
+                .HasForeignKey(pc => pc.ProductId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ProductColor>()
                 .HasRequired(pc => pc.Color)
                 .WithMany(c => c.ProductColors)
-                .HasForeignKey(pc => pc.ColorId);
+                .HasForeignKey(pc => pc.ColorId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

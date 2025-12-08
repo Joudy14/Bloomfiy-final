@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Wedding Bouquet Ideas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="post-header">
+    <div class="container">
+        <h1>Wedding Bouquet Ideas</h1>
+        <div class="post-meta">
+            <span>May 10, 2024</span> •
+            <span>4 min read</span>
+        </div>
+    </div>
+</section>
+
+<section class="post-content">
+    <div class="container">
+        <img src="~/Images/blog/wedding-bouquets.jpg" alt="Wedding Bouquets" class="post-image">
+
+        <div class="post-body">
+            <p>Your wedding bouquet is more than flowers — it's a symbol of your theme, personality, and story. Here are beautiful bouquet ideas to inspire your special day.</p>
+
+            <h2>Classic Round Bouquets</h2>
+            <p>Perfect for traditional weddings, round bouquets often feature roses, peonies, or hydrangeas for a timeless look.</p>
+
+            <h2>Garden-Inspired Bouquets</h2>
+            <p>Loose, natural bouquets give a romantic, airy feel. These often include greenery, wildflowers, and soft pastel blooms.</p>
+
+            <h2>Colorful & Modern Designs</h2>
+            <ul>
+                <li>Vibrant seasonal flowers</li>
+                <li>Unique shapes and asymmetrical arrangements</li>
+                <li>Mix of bold tones with delicate blooms</li>
+            </ul>
+
+            <p>No matter your theme, the perfect bouquet will complement your dress, style, and the atmosphere of your wedding day.</p>
+        </div>
+
+        <div class="post-navigation">
+            <a href="@Url.Action("Index", "Blog")" class="back-to-blog">← Back to Blog</a>
+        </div>
+    </div>
+</section>

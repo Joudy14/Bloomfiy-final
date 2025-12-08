@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using Bloomfiy.Models;
+using Bloomfiy_final.Models;
 
-namespace Bloomfiy.Controllers
+namespace Bloomfiy_final.Controllers
 {
 
     public class ProductController : Controller

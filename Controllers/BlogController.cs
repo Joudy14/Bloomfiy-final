@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Bloomfiy.Controllers
+namespace Bloomfiy_final.Controllers
 {
     public class BlogController : Controller
     {
@@ -13,7 +13,17 @@ namespace Bloomfiy.Controllers
             return View();
         }
 
-        public ActionResult Post(int id)
+        public ActionResult Post1()
+        {
+            return View();
+        }
+
+        public ActionResult Post2()
+        {
+            return View();
+        }
+
+        public ActionResult Post3()
         {
             return View();
         }

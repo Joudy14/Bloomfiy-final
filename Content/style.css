@@ -524,9 +524,9 @@ header nav ul {
 }
 
 
-/* Events Section – Home */
+/* Events Section */
 #events {
-    background: url('/Images/eventbg.jpg') center center/cover no-repeat;
+    background: url('/Images/eventbg.jpg') center no-repeat;
     position: relative;
     padding: 80px 0;
 }
@@ -547,66 +547,83 @@ header nav ul {
         z-index: 1;
     }
 
-
-    #events .products-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-        #events .products-header h2 {
-            font-size: 3.5rem;
-            color: white;
-            font-style: italic;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        #events .products-header p {
-            text-align: center;
-            color: white;
-            font-style: italic;
-            margin-bottom: 3rem;
-        }
-
-
-.events-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-top: 40px;
+#events-title-block h2 {
+    font-size: 3.5rem;
+    font-style: italic;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-family: 'Georgia', 'Times New Roman', serif;
 }
 
-.event-card {
-    background: #f9f7f2;
-    padding: 40px 30px;
-    border-radius: 50%;
+#events-title-block p {
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    border: 1px solid #f0f0f0;
-    transition: transform 0.3s ease;
+    font-style: italic;
+    margin-bottom: 3rem;
+    color: #e8e8e8;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Event Grid Container - Aligns the circles in a row */
+.events-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Space between the circles */
+    flex-wrap: wrap; /* Allows them to stack on smaller screens */
+    margin-top: 50px;
+    padding-bottom: 30px;
+}
+
+/* The Circular Cards */
+.event-card {
+    background-color: rgba(255, 255, 255, 0.92); /* Slightly transparent white */
+    width: 320px; /* Width */
+    height: 320px; /* Height must match width to make a perfect circle */
+    border-radius: 50%; /* This makes it a CIRCLE */
+    /* Centering the text inside the circle */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    aspect-ratio: 1;
-    min-height: 250px;
+    justify-content: center;
+    text-align: center;
+    padding: 30px; /* Prevents text from hitting the edges */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Adds a nice shadow */
+    transition: transform 0.3s ease, background-color 0.3s;
+    cursor: default;
 }
 
+    /* Hover Effect */
     .event-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px); /* Moves up slightly when hovered */
+        background-color: #ffffff; /* Becomes solid white */
     }
 
+    /* Typography inside the circles */
     .event-card h3 {
-        color: #5a7c5a;
+        color: #5a7c5a; /* Your theme green */
+        font-family: 'Georgia', serif;
+        font-size: 1.5rem;
         margin-bottom: 15px;
-        font-weight: 500;
+        font-weight: normal;
     }
 
     .event-card p {
         color: #666;
-        line-height: 1.6;
+        font-size: 1rem;
+        line-height: 1.5;
+        font-style: italic;
+        max-width: 90%; /* Keeps text nicely contained */
     }
 
+/* Responsive adjustment for mobile phones */
+@media (max-width: 768px) {
+    .event-card {
+        width: 280px;
+        height: 280px;
+        margin-bottom: 20px;
+    }
+}
 
 
 

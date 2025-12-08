@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Bloomfiy.Controllers
+namespace Bloomfiy_final.Controllers
 {
     public class InformationController : Controller
     {

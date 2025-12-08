@@ -1,27 +1,4 @@
-﻿/* Events Hero */
-.events-hero {
-    background: linear-gradient(135deg, #8b7355 0%, #5a7c5a 100%);
-    color: white;
-    padding: 100px 0 60px;
-    text-align: center;
-    margin-top: 6.6rem;
-}
-
-    .events-hero h1 {
-        font-size: 2.5rem;
-        font-style: italic;
-        font-weight: 400;
-        margin-bottom: 1rem;
-        color: white;
-    }
-
-    .events-hero p {
-        font-size: 1.1rem;
-        opacity: 0.9;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
+﻿﻿ /* Events Page Main Container */
 /* Event Services */
 .event-services {
     padding: 80px 0;
@@ -122,27 +99,7 @@
 
 
 /* Booking Page */
-.booking-hero {
-    background: #f9f7f2;
-    padding: 100px 0 60px;
-    text-align: center;
-    margin-top: 6.6rem;
-}
 
-    .booking-hero h1 {
-        font-size: 2.5rem;
-        color: #5a7c5a;
-        font-style: italic;
-        font-weight: 400;
-        margin-bottom: 1rem;
-    }
-
-    .booking-hero p {
-        color: #666;
-        font-size: 1.1rem;
-        max-width: 500px;
-        margin: 0 auto;
-    }
 
 .booking-form-section {
     padding: 80px 0;

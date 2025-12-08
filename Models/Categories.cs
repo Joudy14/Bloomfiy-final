@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Bloomfiy.Models
+namespace Bloomfiy_final.Models
 {
     [Table("Categories")]
     public class Categories

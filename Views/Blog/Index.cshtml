@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewBag.Title = "Blog - Floral Inspiration";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -19,7 +19,7 @@
                 <div class="post-content">
                     <h3>Spring Flower Care Guide</h3>
                     <p>Learn how to care for your spring flowers to ensure they stay vibrant and beautiful...</p>
-                    <a href="@Url.Action("Post", "Blog", new { id = 1 })" class="read-more">Read More</a>
+                    <a href="@Url.Action("Post1", "Blog")" class="read-more">Read More</a>
                 </div>
             </article>
 
@@ -29,7 +29,7 @@
                 <div class="post-content">
                     <h3>Rose Care Basics</h3>
                     <p>Everything you need to know about growing and caring for beautiful roses...</p>
-                    <a href="@Url.Action("Post", "Blog", new { id = 2 })" class="read-more">Read More</a>
+                    <a href="@Url.Action("Post2", "Blog")" class="read-more">Read More</a>
                 </div>
             </article>
 
@@ -39,7 +39,7 @@
                 <div class="post-content">
                     <h3>Wedding Bouquet Ideas</h3>
                     <p>Discover beautiful wedding bouquet ideas that will make your special day unforgettable...</p>
-                    <a href="@Url.Action("Post", "Blog", new { id = 3 })" class="read-more">Read More</a>
+                    <a href="@Url.Action("Post3", "Blog")" class="read-more">Read More</a>
                 </div>
             </article>
         </div>

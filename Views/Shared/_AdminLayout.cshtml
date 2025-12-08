@@ -20,7 +20,12 @@
                 <h2>Bloomfiy Admin</h2>
             </div>
             <ul class="admin-menu">
-                <li><a href="@Url.Action("Index", "Admin")" class="@(ViewContext.RouteData.Values["controller"].ToString() == "Admin" ? "active" : "")">Dashboard</a></li>
+                <li>
+                    <a href="@Url.Action("Index", "Admin")"
+                       class="@(ViewContext.RouteData.Values["controller"].ToString() == "Admin" ? "active" : "")">
+                        Dashboard
+                    </a>
+                </li>
                 <li><a href="@Url.Action("Index", "AdminProduct")" class="@(ViewContext.RouteData.Values["controller"].ToString() == "AdminProduct" ? "active" : "")">Products</a></li>
                 <li><a href="@Url.Action("Index", "AdminCategory")">Categories</a></li>
                 <li><a href="@Url.Action("Index", "AdminOrder")">Orders</a></li>

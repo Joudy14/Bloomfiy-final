@@ -1,4 +1,4 @@
-﻿@model Bloomfiy.Models.Product
+﻿@model Bloomfiy_final.Models.Product
 @{
     ViewBag.Title = "Add New Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -111,16 +111,16 @@
 }
 
 <script>
- 
+
     document.addEventListener('DOMContentLoaded', function () {
         var productNameInput = document.getElementById('productName');
 
-      
+
         if (productNameInput) {
             productNameInput.addEventListener('input', function () {
                 var productName = this.value.toLowerCase().replace(/[^a-z0-9]/g, '');
                 if (productName) {
-                  
+
                     var infoImage = document.getElementById('productInfoImage');
                     if (infoImage) {
                         infoImage.value = productName + '_info.jpg';
@@ -141,7 +141,7 @@
             });
         }
 
-    
+
         var colorCheckboxes = document.querySelectorAll('.color-check');
         colorCheckboxes.forEach(function (checkbox) {
             checkbox.addEventListener('change', function () {
@@ -158,7 +158,7 @@
                     }
                     if (colorRow) colorRow.classList.add('selected');
 
-               
+
                     if (filenameInput && !filenameInput.value && productNameInput && productNameInput.value) {
                         var productName = productNameInput.value.toLowerCase().replace(/[^a-z0-9]/g, '');
                         var colorName = colorRow.querySelector('.color-name').textContent.toLowerCase().trim();

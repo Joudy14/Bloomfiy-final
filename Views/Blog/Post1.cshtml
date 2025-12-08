@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Spring Flower Care Guide";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="post-header">
+    <div class="container">
+        <h1>Spring Flower Care Guide</h1>
+        <div class="post-meta">
+            <span>March 15, 2024</span> •
+            <span>5 min read</span>
+        </div>
+    </div>
+</section>
+
+<section class="post-content">
+    <div class="container">
+        <img src="~/Images/blog/spring-care.jpg" alt="Spring Flower Care" class="post-image">
+
+        <div class="post-body">
+            <p>Spring is a time of renewal and beauty, and what better way to celebrate than with fresh, vibrant flowers? Here are simple tips to help your spring blooms stay fresh and beautiful longer.</p>
+
+            <h2>Watering Tips</h2>
+            <p>Most spring flowers prefer consistently moist soil. Water them early in the morning to prevent evaporation.</p>
+
+            <h2>Temperature Matters</h2>
+            <p>Keep your flowers in a cool environment away from direct sunlight and heating vents.</p>
+
+            <h2>Simple Maintenance</h2>
+            <ul>
+                <li>Remove wilted flowers promptly</li>
+                <li>Change water every 2–3 days</li>
+                <li>Trim stems at an angle</li>
+                <li>Keep away from fruits</li>
+            </ul>
+
+            <p>With these simple tips, your spring flowers will bring joy to your home for much longer!</p>
+        </div>
+
+        <div class="post-navigation">
+            <a href="@Url.Action("Index", "Blog")" class="back-to-blog">← Back to Blog</a>
+        </div>
+    </div>
+</section>

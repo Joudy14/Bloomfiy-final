@@ -10,7 +10,7 @@ namespace Bloomfiy_final.Controllers
     public class AdminController : Controller
     {
         // GET: /Admin/Dashboard
-        public ActionResult Dashboard()
+        public ActionResult Index()
         {
             return View();
         }
