@@ -115,3 +115,16 @@ body {
 }
 
 
+.logout-btn {
+    background: none;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+    .logout-btn:hover {
+        background: rgba(255,255,255,0.1);
+    }
