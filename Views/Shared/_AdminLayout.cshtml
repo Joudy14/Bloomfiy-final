@@ -27,7 +27,13 @@
                 <li><a href="@Url.Action("Index", "AdminUser")">Users</a></li>
                 <li><a href="@Url.Action("Index", "AdminEvent")">Events</a></li>
                 <li><a href="@Url.Action("Index", "Home")" target="_blank">View Site</a></li>
-                <li><a href="@Url.Action("Logout", "Account")">Logout</a></li>
+                <li>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="logout-btn">Logout</button>
+                    }
+                </li>
             </ul>
         </nav>
 

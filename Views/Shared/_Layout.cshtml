@@ -68,33 +68,39 @@
                 }
             }
 
-            <div class="user-actions">
+        <div class="user-actions">
 
-                <!-- Wishlist -->
-                <a href="@Url.Action("Index", "Wishlist")" class="action-icon wishlist-icon" title="Wishlist">
-                    ♡ <span class="wishlist-count">0</span>
-                </a>
+            <!-- Wishlist -->
+            <a href="@Url.Action("Index", "Wishlist")" class="action-icon wishlist-icon" title="Wishlist">
+                ♡ <span class="wishlist-count">0</span>
+            </a>
 
-                <!-- Cart -->
-                <a href="@Url.Action("Index", "Cart")" class="action-icon cart-icon" title="Cart">
-                    🛒 <span class="cart-count">0</span>
-                </a>
+            <!-- Cart -->
+            <a href="@Url.Action("Index", "Cart")" class="action-icon cart-icon" title="Cart">
+                🛒 <span class="cart-count">0</span>
+            </a>
 
-                @if (Request.IsAuthenticated)
-                {
-                    <!-- Account -->
-                    <a href="@Url.Action("Index", "Manage")" class="action-icon" title="My Account">👤</a>
+            @if (Request.IsAuthenticated)
+            {
+                <!-- Account -->
+                <a href="@Url.Action("Index", "Manage")" class="action-icon" title="My Account">👤</a>
 
-                    <!-- Logout triggers hidden form -->
-                    <a href="javascript:document.getElementById('logoutForm').submit()" class="action-icon" title="Logout">⎋</a>
-                }
-                else
-                {
-                    <a href="@Url.Action("Login", "Account")" class="action-icon" title="Login">Login</a>
-                    <a href="@Url.Action("Register", "Account")" class="action-icon" title="Register">Register</a>
-                }
+                <!-- Logout triggers hidden form -->
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="action-icon" title="Logout">⎋</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Account")" class="action-icon" title="Login">Login</a>
+                <a href="@Url.Action("Register", "Account")" class="action-icon" title="Register">Register</a>
+            }
 
-            </div>
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Dashboard", "Admin")">Admin</a>
+            }
+
+
+        </div>
 
 
 
