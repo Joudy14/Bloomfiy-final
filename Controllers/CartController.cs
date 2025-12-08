@@ -8,7 +8,7 @@ namespace Bloomfiy.Controllers
     public class CartController : Controller
     {
 
-        // Show cart
+      
         public ActionResult Index()
         {
             System.Diagnostics.Debug.WriteLine("CartController.Index hit!");
@@ -18,13 +18,12 @@ namespace Bloomfiy.Controllers
 
         private const string SESSION_CART = "Bloomfiy.Cart";
 
-        // Add to cart
         [HttpPost]
         public ActionResult Add(int id, string name, decimal price, string color, int quantity)
         {
             var cart = Session[SESSION_CART] as List<CartItem> ?? new List<CartItem>();
 
-            // Check if same product + color exists
+        
             var item = cart.FirstOrDefault(x => x.ProductId == id && x.Color == color);
             if (item != null)
             {
@@ -46,7 +45,6 @@ namespace Bloomfiy.Controllers
             return RedirectToAction("Index");
         }
 
-        // Remove item
         public ActionResult Remove(int id, string color)
         {
             var cart = Session[SESSION_CART] as List<CartItem> ?? new List<CartItem>();
@@ -58,14 +56,14 @@ namespace Bloomfiy.Controllers
             return RedirectToAction("Index");
         }
 
-        // Clear cart
+  
         public ActionResult Clear()
         {
             Session[SESSION_CART] = null;
             return RedirectToAction("Index");
         }
 
-        // Confirm cart -> goes to Checkout page
+     
         public ActionResult Confirm()
         {
             var cart = Session[SESSION_CART] as List<CartItem> ?? new List<CartItem>();
@@ -75,13 +73,11 @@ namespace Bloomfiy.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Save cart for checkout
             Session["CheckoutCart"] = cart;
 
-            // Clear cart
             Session[SESSION_CART] = null;
 
-            return RedirectToAction("Index", "Checkout"); // Redirect to Checkout page
+            return RedirectToAction("Index", "Checkout");
         }
     }
 }

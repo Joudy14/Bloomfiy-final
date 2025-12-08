@@ -1,15 +1,10 @@
-﻿/* ================================
-   GENERAL OVERRIDES
-   Prevent Bootstrap from shrinking inputs
-================================ */
+﻿
 input, select, textarea {
     max-width: 100% !important;
     font-size: 1rem;
 }
 
-/* ================================
-   MANAGE INDEX (My Account)
-================================ */
+/* MANAGE INDEX (My Account) */
 .manage-container {
     max-width: 750px;
     margin: 140px auto;
@@ -70,9 +65,7 @@ input, select, textarea {
         background: #4a6c4a;
     }
 
-/* ================================
-   EDIT PROFILE + CHANGE PASSWORD
-================================ */
+/* EDIT PROFILE , CHANGE PASSWORD */
 .profile-edit-container {
     max-width: 600px;
     margin: 140px auto;
@@ -125,9 +118,7 @@ input, select, textarea {
         background: #4a684a;
     }
 
-/* ================================
-   LOGIN & REGISTER FORM STYLING
-================================ */
+/*   LOGIN , REGISTER FORM STYLING */
 .account-form-container {
     max-width: 550px;
     margin: 140px auto;

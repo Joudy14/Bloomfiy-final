@@ -29,7 +29,7 @@ namespace Bloomfiy.Controllers
             return View(products);
         }
 
-        // GET: Product/Details/5
+        // GET: Product/Details
         public ActionResult Details(int id)
         {
             var product = db.Products
@@ -42,7 +42,7 @@ namespace Bloomfiy.Controllers
                 return HttpNotFound();
             }
 
-            // Get related products
+          
             var relatedProducts = db.Products
                 .Include(p => p.Category)
                 .Include(p => p.ProductColors.Select(pc => pc.Color))
