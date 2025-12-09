@@ -310,7 +310,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\catalog.js" />
     <Content Include="Scripts\DeliveryInfo.js" />
     <Content Include="Scripts\detail.js" />
     <Content Include="Scripts\event.js" />
@@ -326,6 +325,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Privacy.js" />
+    <Content Include="Scripts\product-details.js" />
     <Content Include="Scripts\refund.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\shop.js" />
