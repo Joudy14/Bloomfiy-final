@@ -1,7 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
 
-    const products = [...document.querySelectorAll(".product-card")];
-
     const categoryChecks = document.querySelectorAll(".filter-category");
     const colorFilters = document.querySelectorAll(".color-filter");
 
@@ -11,9 +9,12 @@
     const sortSelect = document.getElementById("sortSelect");
     const clearBtn = document.getElementById("clearFilters");
 
-    let selectedColor = null;
+    /* ================== STATE ================== */
+    let selectedCategories = [];
+    let selectedColors = [];
+    let maxPrice = Number(priceSlider.value);
 
-    /* ===================== FILTER CORE ===================== */
+    /* ================== FILTER CORE ================== */
     function applyFilters() {
 
         const maxPrice = Number(priceSlider.value);
@@ -26,53 +27,50 @@
 
             const productPrice = Number(product.dataset.price);
             const productCategory = product.dataset.category;
+
             const productColors = product.dataset.colors
-                ? product.dataset.colors.split(",")
+                ? product.dataset.colors.split(',')
                 : [];
 
-            /* CATEGORY */
             const categoryMatch =
                 activeCategories.length === 0 ||
                 activeCategories.includes(productCategory);
 
-            /* PRICE */
             const priceMatch = productPrice <= maxPrice;
 
-            /* COLOR */
             const colorMatch =
-                !selectedColor ||
-                productColors.includes(selectedColor);
+                selectedColors.length === 0 ||
+                selectedColors.some(c => productColors.includes(c));
 
-            /* FINAL DECISION */
-            if (categoryMatch && priceMatch && colorMatch) {
-                product.style.display = "flex";
-            } else {
-                product.style.display = "none";
-            }
+            product.style.display =
+                categoryMatch && priceMatch && colorMatch
+                    ? 'flex'
+                    : 'none';
         });
     }
 
-    /* ===================== CATEGORY ===================== */
-    categoryChecks.forEach(chk =>
-        chk.addEventListener("change", applyFilters)
-    );
 
-    /* ===================== PRICE ===================== */
-    priceSlider.addEventListener("input", () => {
-        priceValue.textContent = priceSlider.value;
-        applyFilters();
+    /* ================== CATEGORY ================== */
+    categoryChecks.forEach(chk => {
+        chk.addEventListener("change", () => {
+
+            selectedCategories = Array.from(categoryChecks)
+                .filter(c => c.checked)
+                .map(c => c.value);
+
+            applyFilters();
+        });
     });
 
-    $(function () {
+    /* ================== COLOR ================== */
+    let selectedColors = [];
 
-        let selectedColors = [];
+    document.querySelectorAll('.color-filter').forEach(filter => {
+        filter.addEventListener('click', function () {
 
-        // ✅ Color filter click
-        $('.color-filter').on('click', function () {
+            const colorId = this.dataset.color;
 
-            const colorId = parseInt($(this).data('color'));
-
-            $(this).toggleClass('active');
+            this.classList.toggle('active');
 
             if (selectedColors.includes(colorId)) {
                 selectedColors = selectedColors.filter(c => c !== colorId);
@@ -82,40 +80,24 @@
 
             applyFilters();
         });
-
-
-        function applyFilters() {
-
-            $('.product-card').each(function () {
-
-                const colorAttr = $(this).data('colors');
-
-                // ⚠️ safety check
-                if (!colorAttr) {
-                    $(this).hide();
-                    return;
-                }
-
-                const productColors = colorAttr
-                    .toString()
-                    .split(',')
-                    .map(Number);
-
-                let show = true;
-
-                // ✅ Color filter logic
-                if (selectedColors.length > 0) {
-                    show = selectedColors.some(c => productColors.includes(c));
-                }
-
-                $(this).toggle(show);
-            });
-        }
-
     });
 
 
-    /* ===================== SORT ===================== */
+    document.querySelectorAll('.color-filter, .wishlist-btn').forEach(el => {
+    el.addEventListener('click', e => {
+        e.stopPropagation();   // ⛔ STOP card click
+    });
+});
+
+
+    /* ================== PRICE ================== */
+    priceSlider.addEventListener("input", () => {
+        maxPrice = Number(priceSlider.value);
+        priceValue.textContent = maxPrice;
+        applyFilters();
+    });
+
+    /* ================== SORT ================== */
     sortSelect.addEventListener("change", () => {
 
         const grid = document.getElementById("productsGrid");
@@ -141,13 +123,15 @@
         sorted.forEach(p => grid.appendChild(p));
     });
 
-    /* ===================== CLEAR ===================== */
+    /* ================== CLEAR ================== */
     clearBtn.addEventListener("click", () => {
+
+        selectedCategories = [];
+        selectedColors = [];
+        maxPrice = 200;
 
         categoryChecks.forEach(c => c.checked = false);
         colorFilters.forEach(c => c.classList.remove("active"));
-
-        selectedColor = null;
 
         priceSlider.value = 200;
         priceValue.textContent = 200;
@@ -155,7 +139,7 @@
         applyFilters();
     });
 
-    /* ===================== WISHLIST ===================== */
+    /* ================== WISHLIST ================== */
     document.querySelectorAll(".wishlist-btn").forEach(btn => {
 
         btn.addEventListener("click", e => {
@@ -176,4 +160,6 @@
         });
     });
 
+    // ✅ init
+    applyFilters();
 });

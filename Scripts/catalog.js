@@ -1,4 +1,4 @@
-﻿// Minimal shop.js - TEST VERSION
+﻿/* Minimal shop.js - TEST VERSION
 document.addEventListener('DOMContentLoaded', function () {
     console.log('✅ Shop JS loaded');
 
@@ -198,4 +198,4 @@ document.head.appendChild(style);
             }, 4000);
         }
     });
-
+    */

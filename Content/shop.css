@@ -177,3 +177,31 @@
         position: static;
     }
 }
+/* FORCE color filters to be clickable */
+.color-filter {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    outline: none;
+    background-clip: padding-box;
+    position: relative;
+    z-index: 10;
+    transition: transform .2s, border-color .2s;
+}
+
+    .color-filter:hover {
+        transform: scale(1.15);
+    }
+
+    .color-filter.active {
+        border-color: #5a7c5a;
+        transform: scale(1.2);
+    }
+
+/* IMPORTANT: allow clicks */
+.color-filters,
+.color-filter {
+    pointer-events: auto !important;
+}

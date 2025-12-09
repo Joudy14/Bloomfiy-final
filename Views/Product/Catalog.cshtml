@@ -39,13 +39,15 @@
                 <div class="color-filters">
                     @foreach (var color in colors)
                     {
-                        <span class="color-filter"
-                              style="background:@color.ColorCode"
-                              data-color="@color.ColorId"
-                              title="@color.ColorName">
-                        </span>
+                        <button type="button"
+                                class="color-filter"
+                                data-color="@color.ColorId"
+                                title="@color.ColorName"
+                                style="background:@color.ColorCode">
+                        </button>
                     }
                 </div>
+
             </div>
 
             <div class="filter-group">
