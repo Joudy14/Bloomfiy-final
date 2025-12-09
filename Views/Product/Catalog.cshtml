@@ -1,154 +1,120 @@
 ﻿@model IEnumerable<Bloomfiy_final.Models.Product>
+
 @{
-    ViewBag.Title = "Flower Catalog - Bloomfiy";
+    ViewBag.Title = "Shop | Bloomfiy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var categories = ViewBag.Categories as List<Bloomfiy_final.Models.Categories>;
     var colors = ViewBag.Colors as List<Bloomfiy_final.Models.Color>;
 }
 
-<section class="shop-hero">
-    <div class="container">
-        <h1>Our Flower Collection</h1>
-        <p>Discover beautiful floral arrangements for every occasion</p>
+<section class="catalog-page">
+
+    <!-- HEADER -->
+    <div class="catalog-header">
+        <h1>Our Flowers</h1>
+        <p>Fresh, elegant blooms crafted with love</p>
     </div>
-</section>
 
-<section class="product-catalog">
-    <div class="container">
-        <!-- Filters Sidebar -->
-        <aside class="filters-sidebar">
-            <!-- Category Filter -->
-            @if (categories != null && categories.Count > 0)
-            {
-                <div class="filter-group">
-                    <h3>Categories</h3>
-                    <div class="filter-options">
-                        @foreach (var category in categories)
-                        {
-                            <label class="filter-option">
-                                <input type="checkbox" data-category="@category.CategoryId"> @category.CategoryName
-                            </label>
-                        }
-                    </div>
-                </div>
-            }
+    <div class="catalog-layout">
 
-            <!-- Color Filter -->
-            @if (colors != null && colors.Count > 0)
-            {
-                <div class="filter-group">
-                    <h3>Colors</h3>
-                    <div class="color-filters">
-                        @foreach (var color in colors)
-                        {
-                            string colorCode = "#ccc";
-                            if (!string.IsNullOrEmpty(color.ColorCode))
-                            {
-                                colorCode = color.ColorCode;
-                            }
-                            <div class="color-option"
-                                 style="background-color: @colorCode"
-                                 data-color-id="@color.ColorId"
-                                 title="@color.ColorName">
-                            </div>
-                        }
-                    </div>
-                </div>
-            }
+        <!-- FILTERS -->
+        <aside class="catalog-filters">
 
             <div class="filter-group">
-                <h3>Price Range</h3>
-                <div class="price-range">
-                    <input type="range" min="0" max="200" value="200" class="price-slider" id="priceSlider">
-                    <div class="price-values">
-                        <span>$<span id="minPrice">0</span></span>
-                        <span>$<span id="maxPrice">200</span></span>
-                    </div>
-                </div>
+                <h3>Categories</h3>
+                @foreach (var cat in categories)
+                {
+                    <label class="filter-option">
+                        <input type="checkbox"
+                               class="filter-category"
+                               value="@cat.CategoryId">
+                        @cat.CategoryName
+                    </label>
+                }
             </div>
 
-            <button class="clear-filters-btn" id="clearFilters">Clear All Filters</button>
-        </aside>
-
-        <!-- Products Main Area -->
-        <div class="products-main">
-            <div class="products-header">
-                <div class="results-count">
-                    Showing @Model.Count() product@(Model.Count() != 1 ? "s" : "")
-                </div>
-            </div>
-
-            @if (Model.Any())
-            {
-                <div class="products-grid" id="productsGrid">
-                    @foreach (var product in Model)
+            <div class="filter-group">
+                <h3>Colors</h3>
+                <div class="color-filters">
+                    @foreach (var color in colors)
                     {
-                        <div class="product-card" data-product-id="@product.ProductId"
-                             data-price="@product.BasePrice"
-                             data-category="@product.CategoryId">
-                            <div class="product-image">
-                                <img src="@product.DefaultImageUrl" alt="@product.Name" class="main-product-image">
-                                <div class="product-actions">
-                                    <button class="wishlist-btn" title="Add to Wishlist">♡</button>
-                                </div>
-                                @if (product.BasePrice > 50)
-                                {
-                                    <div class="product-badge">Premium</div>
-                                }
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">@product.Name</h3>
-                                <p class="product-description">@product.Description</p>
-
-                                <div class="product-price">
-                                    <span class="current-price">$@product.BasePrice</span>
-                                </div>
-
-                                @if (product.ProductColors != null && product.ProductColors.Any())
-                                {
-                                    <div class="product-colors">
-                                        Available in:
-                                        @{
-                                            int colorCount = 0;
-                                            foreach (var pc in product.ProductColors)
-                                            {
-                                                if (colorCount < 3 && pc.Color != null)
-                                                {
-                                                    string pcColorCode = "#ccc";
-                                                    if (!string.IsNullOrEmpty(pc.Color.ColorCode))
-                                                    {
-                                                        pcColorCode = pc.Color.ColorCode;
-                                                    }
-                                                    <span class="color-chip" style="background-color: @pcColorCode"
-                                                          title="@pc.Color.ColorName">
-                                                    </span>
-                                                    colorCount++;
-                                                }
-                                            }
-                                            if (product.ProductColors.Count > 3)
-                                            {
-                                                <span class="more-colors">+@(product.ProductColors.Count - 3) more</span>
-                                            }
-                                        }
-                                    </div>
-                                }
-
-                                <a href="@Url.Action("Details", new { id = product.ProductId })" class="add-to-cart-btn">
-                                    View Details
-                                </a>
-                            </div>
-                        </div>
+                        <span class="color-filter"
+                              style="background:@color.ColorCode"
+                              data-color="@color.ColorId"
+                              title="@color.ColorName">
+                        </span>
                     }
                 </div>
-            }
-            else
-            {
-                <div class="no-products">
-                    <p>No products found. Please try a different filter or search.</p>
-                    <a href="@Url.Action("Catalog")" class="btn btn-primary">View All Products</a>
+            </div>
+
+            <div class="filter-group">
+                <h3>Max Price</h3>
+                <input type="range" id="priceFilter" min="0" max="200" value="200">
+                <span class="price-label">$<span id="priceValue">200</span></span>
+            </div>
+
+            <button id="clearFilters" class="clear-btn">Clear Filters</button>
+
+        </aside>
+
+        <!-- PRODUCTS -->
+        <main class="catalog-products">
+
+            <!-- SORT -->
+            <div class="catalog-sort">
+                <select id="sortSelect">
+                    <option value="">Sort by</option>
+                    <option value="name-asc">Name A–Z</option>
+                    <option value="price-asc">Price Low → High</option>
+                    <option value="price-desc">Price High → Low</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                @foreach (var product in Model)
+                {
+                <div class="product-card"
+                     data-product-id="@product.ProductId"
+                     data-category="@product.CategoryId"
+                     data-price="@product.BasePrice"
+                     data-colors="@string.Join(",", product.ProductColors.Select(pc => pc.ColorId))">
+
+
+                    <div class="product-image">
+                        <img src="@product.DefaultImageUrl" alt="@product.Name">
+                        <button class="wishlist-btn" data-id="@product.ProductId">♡</button>
+                    </div>
+
+                    <div class="product-info">
+                        <h3>@product.Name</h3>
+
+                        <p>
+                            @(product.Description?.Length > 80
+                                    ? product.Description.Substring(0, 80) + "..."
+                                    : product.Description)
+                        </p>
+
+                        <div class="product-price">
+                            From $@product.BasePrice
+                        </div>
+
+                        <a href="@Url.Action("Details", "Product", new { id = product.ProductId })"
+                           class="view-btn">
+                            View Details
+                        </a>
+                    </div>
+
                 </div>
-            }
-        </div>
+                }
+            </div>
+
+        </main>
+
     </div>
+
 </section>
+
+@section Scripts {
+    <script src="~/Scripts/shop.js"></script>
+}

@@ -183,7 +183,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Images\products_img\Alstroemeria\Class1.cs" />
     <Compile Include="Images\products_img\Aster\Class1.cs" />
     <Compile Include="Images\products_img\Baby rose\Class1.cs" />
     <Compile Include="Images\products_img\Calla\Class1.cs" />
@@ -262,22 +261,20 @@
     <Content Include="Images\joud.png" />
     <Content Include="Images\layan.png" />
     <Content Include="Images\maftuna.png" />
-    <Content Include="Images\products_img\Alstroemeria\Alstroemeria_info.JPG" />
-    <Content Include="Images\products_img\Alstroemeria\Alstroemeria_pink.jpg" />
-    <Content Include="Images\products_img\Alstroemeria\Alstroemeria_purple.jpg" />
-    <Content Include="Images\products_img\Alstroemeria\Alstroemeria_red.jpg" />
-    <Content Include="Images\products_img\Alstroemeria\Alstroemeria_white.jpg" />
-    <Content Include="Images\products_img\Alstroemeria\Alstroemeria_yellow.jpg" />
+    <Content Include="Images\products_img\alstroemeria\alstroemeria_info.JPG" />
+    <Content Include="Images\products_img\alstroemeria\alstroemeria_pink.jpg" />
+    <Content Include="Images\products_img\alstroemeria\alstroemeria_purple.jpg" />
+    <Content Include="Images\products_img\alstroemeria\alstroemeria_red.jpg" />
+    <Content Include="Images\products_img\alstroemeria\alstroemeria_white.jpg" />
+    <Content Include="Images\products_img\alstroemeria\alstroemeria_yellow.jpg" />
     <Content Include="Images\products_img\Aster\Aster_1.JPG" />
     <Content Include="Images\products_img\Aster\Aster_2.jpg" />
     <Content Include="Images\products_img\Aster\Aster_3.jpg" />
     <Content Include="Images\products_img\Aster\Aster_info.JPG" />
-    <Content Include="Images\products_img\peony\anthony-fomin-h7_SyoBhHF0-unsplash.jpg" />
-    <Content Include="Images\products_img\peony\mert-yuce-GXhh8xJ5Oy0-unsplash.jpg" />
     <Content Include="Images\products_img\peony\peony_info.JPG" />
-    <Content Include="Images\products_img\peony\peony_pink.png" />
-    <Content Include="Images\products_img\peony\peony_red.png" />
-    <Content Include="Images\products_img\peony\peony_white.png" />
+    <Content Include="Images\products_img\peony\peony_pink.jpg" />
+    <Content Include="Images\products_img\peony\peony_red.jpg" />
+    <Content Include="Images\products_img\peony\peony_white.jpg" />
     <Content Include="Images\sara-iovino-iouHI5jIKKI-unsplash.jpg" />
     <Content Include="Images\webName.png" />
     <Compile Include="Models\WishlistItem.cs" />
@@ -331,6 +328,7 @@
     <Content Include="Scripts\Privacy.js" />
     <Content Include="Scripts\refund.js" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\shop.js" />
     <Content Include="Scripts\terms.js" />
     <Content Include="Views\Cart\CustomizeBouquet.txt" />
     <Content Include="Views\Cart\OrderComplete.txt" />

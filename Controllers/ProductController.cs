@@ -23,11 +23,13 @@ namespace Bloomfiy_final.Controllers
                 .OrderBy(p => p.Name)
                 .ToList();
 
-            ViewBag.Categories = db.Categories.ToList();
-            ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
+            ViewBag.Categories = db.Categories.ToList();   // ✅ REQUIRED
+            ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList(); // ✅ REQUIRED
 
             return View(products);
         }
+
+
 
         // GET: Product/Details
         public ActionResult Details(int id)

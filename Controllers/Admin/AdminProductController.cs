@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Bloomfiy_final.Models;
 using System.Data.Entity;
@@ -14,17 +13,18 @@ namespace Bloomfiy_final.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: /AdminProduct/
+        // ========================= INDEX =========================
         public ActionResult Index()
         {
             var products = db.Products
-                .Include("Category")
-                .Include("ProductColors")
+                .Include(p => p.Category)
+                .Include(p => p.ProductColors)
                 .ToList();
+
             return View("~/Views/Admin/AdminProduct/Index.cshtml", products);
         }
 
-        // GET: /AdminProduct/Create
+        // ========================= CREATE (GET) =========================
         public ActionResult Create()
         {
             ViewBag.Categories = db.Categories.ToList();
@@ -32,106 +32,80 @@ namespace Bloomfiy_final.Controllers
             return View("~/Views/Admin/AdminProduct/Create.cshtml");
         }
 
+        // ========================= CREATE (POST) =========================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product, int[] selectedColors,
-                                   Dictionary<int, string> colorImageNames,
-                                   string productInfoImage)
+        public ActionResult Create(
+            Product product,
+            int[] selectedColors,
+            Dictionary<int, string> colorImageNames,
+            string productInfoImage)
         {
-            // DEBUG: Log everything
-            System.Diagnostics.Debug.WriteLine($"=== CREATE DEBUG ===");
-            System.Diagnostics.Debug.WriteLine($"CategoryId from form: {product.CategoryId}");
-            System.Diagnostics.Debug.WriteLine($"All categories in DB:");
-            foreach (var cat in db.Categories.ToList())
+            if (!ModelState.IsValid)
             {
-                System.Diagnostics.Debug.WriteLine($"- ID: {cat.CategoryId}, Name: {cat.CategoryName}");
+                ViewBag.Categories = db.Categories.ToList();
+                ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
+                return View("~/Views/Admin/AdminProduct/Create.cshtml", product);
             }
 
-            if (ModelState.IsValid)
+            product.DateCreated = DateTime.Now;
+            product.InfoImage = productInfoImage;
+
+            db.Products.Add(product);
+            db.SaveChanges();
+
+            // Create image folder
+            string folderPath = Server.MapPath($"~/Images/products_img/{product.ImageFolderName}/");
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            // Save colors
+            // ✅ Save colors with correct image filenames
+            if (selectedColors != null)
             {
-                try
+                foreach (var colorId in selectedColors)
                 {
-                    // Double-check category exists
-                    var category = db.Categories.Find(product.CategoryId);
-                    if (category == null)
+                    string formKey = $"colorImageNames[{colorId}]";
+                    string imageName = Request.Form[formKey];
+
+                    // ✅ If admin typed filename
+                    if (!string.IsNullOrWhiteSpace(imageName))
                     {
-                        System.Diagnostics.Debug.WriteLine($"ERROR: CategoryId {product.CategoryId} not found!");
-                        ModelState.AddModelError("CategoryId", "Selected category does not exist");
-                        ViewBag.Categories = db.Categories.ToList();
-                        ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
-                        return View("~/Views/Admin/AdminProduct/Create.cshtml", product);
+                        imageName = imageName.Trim();
+                    }
+                    else
+                    {
+                        // ✅ Fallback using COLOR NAME (NOT ID)
+                        var color = db.Colors.Find(colorId);
+                        var cleanColorName = color.ColorName.ToLower().Replace(" ", "");
+                        imageName = $"{product.ImageFolderName}_{cleanColorName}.jpg";
                     }
 
-                    System.Diagnostics.Debug.WriteLine($"Found category: {category.CategoryName}");
-
-                    product.DateCreated = DateTime.Now;
-                    product.InfoImage = productInfoImage;
-
-                    // Save product
-                    db.Products.Add(product);
-                    db.SaveChanges();
-
-                    // 2. Create folder for images
-                    string folderPath = Server.MapPath($"~/Images/products_img/{product.ImageFolderName}/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-
-                // 3. Save colors with images
-                if (selectedColors != null)
-                {
-                    foreach (var colorId in selectedColors)
+                    db.ProductColors.Add(new ProductColor
                     {
-                        var productColor = new ProductColor
-                        {
-                            ProductId = product.ProductId,
-                            ColorId = colorId,
-                            ImageFileName = colorImageNames.ContainsKey(colorId)
-                                ? colorImageNames[colorId].Trim()
-                                : $"{product.ImageFolderName}_{colorId}.jpg"
-                        };
-
-                        db.ProductColors.Add(productColor);
-                    }
-                    db.SaveChanges();
+                        ProductId = product.ProductId,
+                        ColorId = colorId,
+                        ImageFileName = imageName
+                    });
                 }
 
-                    TempData["SuccessMessage"] = "Product created successfully!";
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"EXCEPTION: {ex.Message}");
-                    if (ex.InnerException != null)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"INNER: {ex.InnerException.Message}");
-                    }
-                    ViewBag.Error = ex.Message;
-                    ViewBag.Categories = db.Categories.ToList();
-                    ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
-                    return View("~/Views/Admin/AdminProduct/Create.cshtml", product);
-                }
+                db.SaveChanges();
             }
 
-            ViewBag.Categories = db.Categories.ToList();
-            ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
-            return View("~/Views/Admin/AdminProduct/Create.cshtml", product);
+
+            TempData["SuccessMessage"] = "Product created successfully!";
+            return RedirectToAction("Index");
         }
 
-
-        // GET: /AdminProduct/Edit/5
+        // ========================= EDIT (GET) =========================
         public ActionResult Edit(int id)
         {
             var product = db.Products
-                .Include("ProductColors")
-                .Include("ProductColors.Color")
+                .Include(p => p.ProductColors.Select(pc => pc.Color))
                 .FirstOrDefault(p => p.ProductId == id);
 
             if (product == null)
-            {
                 return HttpNotFound();
-            }
 
             ViewBag.Categories = db.Categories.ToList();
             ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
@@ -139,79 +113,93 @@ namespace Bloomfiy_final.Controllers
             return View("~/Views/Admin/AdminProduct/Edit.cshtml", product);
         }
 
-        // POST: /AdminProduct/Edit/
+        // ========================= EDIT (POST) =========================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product, int[] selectedColors, Dictionary<int, string> colorImageNames, string productInfoImage)
+        public ActionResult Edit(Product product, int[] selectedColors, string productInfoImage)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // Update product basic info
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-
-                // Get existing product colors
-                var existingProductColors = db.ProductColors
-                    .Where(pc => pc.ProductId == product.ProductId)
-                    .ToList();
-
-                // Create a dictionary of existing color-image pairs
-                var existingImages = new Dictionary<int, string>();
-                foreach (var pc in existingProductColors)
-                {
-                    existingImages[pc.ColorId] = pc.ImageFileName;
-                }
-
-                // Remove all existing colors
-                db.ProductColors.RemoveRange(existingProductColors);
-                db.SaveChanges();
-
-                // Add updated colors with their image filenames
-                if (selectedColors != null)
-                {
-                    for (int i = 0; i < selectedColors.Length; i++)
-                    {
-                        var productColor = new ProductColor
-                        {
-                            ProductId = product.ProductId,
-                            ColorId = selectedColors[i],
-                            ImageFileName = colorImageNames != null && i < colorImageNames.Count && !string.IsNullOrEmpty(colorImageNames[i].Trim())
-                                ? colorImageNames[i].Trim()
-                                : existingImages.ContainsKey(selectedColors[i])
-                                    ? existingImages[selectedColors[i]]
-                                    : $"{product.ImageFolderName}_{i + 1}.jpg"
-                        };
-
-                        db.ProductColors.Add(productColor);
-                    }
-                    db.SaveChanges();
-                }
-
-                TempData["SuccessMessage"] = "Product updated successfully!";
-                return RedirectToAction("Index");
+                ViewBag.Categories = db.Categories.ToList();
+                ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
+                return View("~/Views/Admin/AdminProduct/Edit.cshtml", product);
             }
 
-            ViewBag.Categories = db.Categories.ToList();
-            ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
-            return View("~/Views/Admin/AdminProduct/Edit.cshtml", product);
+            // ✅ Update main product fields
+            var dbProduct = db.Products.Find(product.ProductId);
+            if (dbProduct == null)
+                return HttpNotFound();
+
+            dbProduct.Name = product.Name;
+            dbProduct.Description = product.Description;
+            dbProduct.BasePrice = product.BasePrice;
+            dbProduct.StockQuantity = product.StockQuantity;
+            dbProduct.CategoryId = product.CategoryId;
+            dbProduct.IsAvailable = product.IsAvailable;
+            dbProduct.InfoImage = productInfoImage;
+
+            db.SaveChanges();
+
+            // ✅ Save existing image filenames BEFORE deleting
+            var existingImages = db.ProductColors
+                .Where(pc => pc.ProductId == product.ProductId)
+                .ToDictionary(pc => pc.ColorId, pc => pc.ImageFileName);
+
+            // ✅ Remove old ProductColors
+            db.ProductColors.RemoveRange(
+                db.ProductColors.Where(pc => pc.ProductId == product.ProductId)
+            );
+            db.SaveChanges();
+
+            // ✅ Re-add selected colors with CORRECT filenames
+            if (selectedColors != null)
+            {
+                foreach (var colorId in selectedColors)
+                {
+                    string formKey = $"colorImageNames[{colorId}]";
+                    string imageName = Request.Form[formKey];
+
+                    // 1️⃣ Take from form input
+                    if (!string.IsNullOrWhiteSpace(imageName))
+                        imageName = imageName.Trim();
+
+                    // 2️⃣ Fallback to existing filename
+                    else if (existingImages.ContainsKey(colorId))
+                        imageName = existingImages[colorId];
+
+                    // 3️⃣ LAST fallback (should rarely happen)
+                    else
+                        imageName = $"{dbProduct.ImageFolderName}_{colorId}.jpg";
+
+                    db.ProductColors.Add(new ProductColor
+                    {
+                        ProductId = dbProduct.ProductId,
+                        ColorId = colorId,
+                        ImageFileName = imageName
+                    });
+                }
+
+                db.SaveChanges();
+            }
+
+            TempData["SuccessMessage"] = "Product updated successfully!";
+            return RedirectToAction("Index");
         }
 
-        // GET: /AdminProduct/Delete/5
+
+        // ========================= DELETE =========================
         public ActionResult Delete(int id)
         {
             var product = db.Products
-                .Include("ProductColors")
-                .Include("ProductColors.Color")
+                .Include(p => p.ProductColors)
                 .FirstOrDefault(p => p.ProductId == id);
 
             if (product == null)
-            {
                 return HttpNotFound();
-            }
+
             return View("~/Views/Admin/AdminProduct/Delete.cshtml", product);
         }
 
-        // POST: /AdminProduct/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -219,20 +207,17 @@ namespace Bloomfiy_final.Controllers
             var product = db.Products.Find(id);
             if (product != null)
             {
-                // First delete related ProductColors
-                var relatedColors = db.ProductColors.Where(pc => pc.ProductId == id).ToList();
-                db.ProductColors.RemoveRange(relatedColors);
-
-                // Then delete product
+                var colors = db.ProductColors.Where(pc => pc.ProductId == id);
+                db.ProductColors.RemoveRange(colors);
                 db.Products.Remove(product);
                 db.SaveChanges();
-
-                TempData["SuccessMessage"] = "Product deleted successfully!";
             }
+
+            TempData["SuccessMessage"] = "Product deleted successfully!";
             return RedirectToAction("Index");
         }
 
-        // Toggle Availability
+        // ========================= TOGGLE =========================
         public ActionResult ToggleAvailability(int id)
         {
             var product = db.Products.Find(id);
@@ -240,7 +225,6 @@ namespace Bloomfiy_final.Controllers
             {
                 product.IsAvailable = !product.IsAvailable;
                 db.SaveChanges();
-                TempData["SuccessMessage"] = $"Product {(product.IsAvailable ? "activated" : "deactivated")} successfully!";
             }
             return RedirectToAction("Index");
         }

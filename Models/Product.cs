@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Bloomfiy_final.Models
 {
@@ -34,6 +35,26 @@ namespace Bloomfiy_final.Models
             }
         }
 
+        [NotMapped]
+        public string DefaultImageUrl
+        {
+            get
+            {
+                if (this.ProductColors != null)
+                {
+                    var firstColorImage = this.ProductColors
+                        .FirstOrDefault(pc => !string.IsNullOrEmpty(pc.ImageFileName));
+
+                    if (firstColorImage != null)
+                    {
+                        return $"/Images/products_img/{this.ImageFolderName}/{firstColorImage.ImageFileName}";
+                    }
+                }
+
+                return "/Images/products_img/default.jpg";
+            }
+        }
+
         [StringLength(500)]
         [Column("description")]
         public string Description { get; set; }
@@ -63,26 +84,6 @@ namespace Bloomfiy_final.Models
 
         // Navigation property for ProductColors
         public virtual ICollection<ProductColor> ProductColors { get; set; }
-
-        // Helper property to get default image
-        [NotMapped]
-        public string DefaultImageUrl
-        {
-            get
-            {
-                if (this.ProductColors != null && this.ProductColors.Count > 0)
-                {
-                    foreach (var pc in this.ProductColors)
-                    {
-                        if (pc != null && !string.IsNullOrEmpty(pc.ImageFileName))
-                        {
-                            return $"/Images/products_img/{this.ImageFolderName}/{pc.ImageFileName}";
-                        }
-                    }
-                }
-                return "/Images/products_img/default.jpg";
-            }
-        }
 
         [NotMapped]
         public string InfoImageUrl

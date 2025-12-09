@@ -157,7 +157,9 @@ namespace Bloomfiy_final.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    Address = model.Address
+                    Address = model.Address,
+                     PhoneNumber = model.PhoneNumber
+
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
