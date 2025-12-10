@@ -42,5 +42,9 @@ namespace Bloomfiy_final.Models
                 .HasForeignKey(pc => pc.ColorId)
                 .WillCascadeOnDelete(false);
         }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
     }
 }

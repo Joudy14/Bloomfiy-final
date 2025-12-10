@@ -1,0 +1,82 @@
+﻿@model Bloomfiy_final.Models.CheckoutViewModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="checkout-page container">
+    <h2>Checkout</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="checkout-error">@TempData["Error"]</div>
+    }
+
+    <div class="checkout-grid">
+
+        <!-- LEFT SIDE: FORM -->
+        <form method="post" action="/Checkout/ProcessOrder" class="checkout-form">
+            @Html.AntiForgeryToken()
+
+            <h3>Billing Details</h3>
+
+            <label>Full Name</label>
+            <input type="text" name="FullName" required />
+
+            <label>Phone Number</label>
+            <input type="text" name="Phone" required />
+
+            <label>City</label>
+            <input type="text" name="City" required />
+
+            <label>Address</label>
+            <textarea name="Address" required></textarea>
+
+            <h3>Payment Method</h3>
+
+            <div class="fake-card">
+                <label>Card Number</label>
+                <input type="text" maxlength="16" required />
+
+                <label>Expiration</label>
+                <div class="expiration">
+                    <input type="text" placeholder="MM" maxlength="2" required />
+                    <input type="text" placeholder="YY" maxlength="2" required />
+                </div>
+
+                <label>CVV</label>
+                <input type="text" maxlength="3" required />
+            </div>
+
+            <button class="place-order-btn">Place Order</button>
+        </form>
+
+        <!-- RIGHT SIDE: ORDER SUMMARY -->
+        <div class="checkout-summary">
+            <h3>Your Order</h3>
+
+            @foreach (var item in Model.CartItems)
+            {
+                <div class="summary-item">
+                    <img src="@item.ImageUrl" />
+                    <div>
+                        <strong>@item.Name</strong>
+                        <div>Color: @item.Color</div>
+                        <div>Qty: @item.Quantity</div>
+
+                        @if (item.HasBouquet)
+                        {
+                            <div class="bouquet-tag">+ Bouquet Wrap</div>
+                        }
+                    </div>
+                    <span>$@item.TotalPrice</span>
+                </div>
+            }
+
+            <div class="summary-total">
+                <strong>Total:</strong> $@Model.Total
+            </div>
+        </div>
+
+    </div>
+</section>

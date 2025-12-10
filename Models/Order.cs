@@ -7,21 +7,18 @@ namespace Bloomfiy_final.Models
 {
     public class Order
     {
-        public int Id { get; set; } // assigned when saved to session list
-        public string OrderNumber { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public int OrderId { get; set; }
+        public string UserId { get; set; }  // Identity user
+        public DateTime CreatedAt { get; set; }
+        public string Status { get; set; }  // Pending, Preparing, Shipped, Completed
 
-        public List<CartItem> Items { get; set; } = new List<CartItem>();
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
 
-        public decimal Subtotal { get; set; }
-        public decimal Tax { get; set; }
-        public decimal Shipping { get; set; }
-        public decimal Total { get; set; }
+        public decimal TotalAmount { get; set; }
 
-        // buyer info
-        public string CustomerName { get; set; }
-        public string CustomerEmail { get; set; }
-        public string CustomerPhone { get; set; }
-        public string ShippingAddress { get; set; }
+        public virtual List<OrderItem> Items { get; set; }
     }
 }

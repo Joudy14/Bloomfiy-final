@@ -1,0 +1,41 @@
+﻿@model List<Bloomfiy_final.Models.Order>
+@{
+    ViewBag.Title = "My Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container orders-page">
+    <h2>My Orders</h2>
+
+    @if (!Model.Any())
+    {
+        <p>You have no orders yet.</p>
+    }
+    else
+    {
+        foreach (var order in Model)
+        {
+            <div class="order-card">
+                <h4>Order #@order.OrderId</h4>
+                <p><strong>Status:</strong> @order.Status</p>
+                <p><strong>Date:</strong> @order.OrderDate.ToShortDateString()</p>
+                <p><strong>Total:</strong> $@order.TotalAmount</p>
+
+                <ul>
+                    @foreach (var item in order.OrderItems)
+                    {
+                        <li>
+                            @item.ProductName
+                            (@item.Color) × @item.Quantity
+                            @if (item.HasBouquet)
+                            {
+                                <span>🌸 Bouquet</span>
+                            }
+                            – $@item.TotalPrice
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</section>

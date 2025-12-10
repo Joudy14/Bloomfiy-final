@@ -225,18 +225,25 @@
     <Compile Include="Migrations\202512082157377_InitialBloomfiySetup.Designer.cs">
       <DependentUpon>202512082157377_InitialBloomfiySetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202512102306042_AddOrders.cs" />
+    <Compile Include="Migrations\202512102306042_AddOrders.Designer.cs">
+      <DependentUpon>202512102306042_AddOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\EditProfileViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductColor.cs" />
+    <Content Include="Content\Checkout.css" />
     <Content Include="Images\about-image.jpg" />
     <Content Include="Images\aboutbg_pic.jpg" />
     <Content Include="Images\aboutintro.jpg" />
@@ -298,8 +305,8 @@
     <Content Include="Content\shop.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\terms.css" />
-    <Content Include="Controllers\CheckoutController.txt" />
-    <Content Include="Controllers\OrderController.txt" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\WishlistController.cs" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -367,12 +374,6 @@
     <Content Include="Views\Admin\AdminCategory\Create.cshtml" />
     <Content Include="Views\Admin\AdminCategory\Edit.cshtml" />
     <Content Include="Views\Admin\AdminCategory\Index.cshtml" />
-    <Content Include="Views\Admin\AdminContent\BlogPosts.cshtml" />
-    <Content Include="Views\Admin\AdminContent\ContactMessage.cshtml" />
-    <Content Include="Views\Admin\AdminContent\CreateBlogPost.cshtml" />
-    <Content Include="Views\Admin\AdminContent\EditBlogPost.cshtml" />
-    <Content Include="Views\Admin\AdminContent\MessageDetails.cshtml" />
-    <Content Include="Views\Admin\AdminContent\Subscribers.cshtml" />
     <Content Include="Views\Admin\AdminEvent\BookingDetails.cshtml" />
     <Content Include="Views\Admin\AdminEvent\Bookings.cshtml" />
     <Content Include="Views\Admin\AdminOrder\Details.cshtml" />
@@ -383,10 +384,7 @@
     <Content Include="Views\Admin\AdminProduct\Index.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
-    <Content Include="Views\Checkout\OrderComplete.cshtml" />
-    <Content Include="Views\Checkout\OrderReview.cshtml" />
-    <Content Include="Views\Checkout\PaymentInfo.cshtml" />
-    <Content Include="Views\Checkout\ShippingInfo.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Event\Booking.cshtml" />
     <Content Include="Views\Event\Services.cshtml" />
     <Content Include="Views\Information\DeliveryInfo.cshtml" />
@@ -406,10 +404,11 @@
     <Content Include="Views\Blog\Post1.cshtml" />
     <Content Include="Views\Blog\Post2.cshtml" />
     <Content Include="Views\Blog\Post3.cshtml" />
+    <Content Include="Views\Manage\View.cshtml" />
+    <Content Include="Views\Checkout\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -439,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512082157377_InitialBloomfiySetup.resx">
       <DependentUpon>202512082157377_InitialBloomfiySetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512102306042_AddOrders.resx">
+      <DependentUpon>202512102306042_AddOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
