@@ -12,19 +12,30 @@ namespace Bloomfiy_final.Controllers
         public ActionResult Index()
         {
             System.Diagnostics.Debug.WriteLine("CartController.Index hit!");
-            var cart = Session["Bloomfiy.Cart"] as List<Bloomfiy_final.Models.CartItem> ?? new List<Bloomfiy_final.Models.CartItem>();
+            var cart = Session["Bloomfiy.Cart"] as List<CartItem>;
+
+            if (cart == null || !cart.Any())
+            {
+                // Try restore from LocalStorage
+                cart = new List<CartItem>();
+                ViewBag.RestoreCartFromLocalStorage = true;
+            }
+
             return View(cart);
         }
 
+
         private const string SESSION_CART = "Bloomfiy.Cart";
 
+        [Authorize]
         [HttpPost]
-        public ActionResult Add(int id, string name, decimal price, string color, int quantity)
+        public ActionResult Add(int id, string name, decimal price, string color, int quantity, string imageUrl, bool hasBouquet)
         {
+
             var cart = Session[SESSION_CART] as List<CartItem> ?? new List<CartItem>();
 
-        
-            var item = cart.FirstOrDefault(x => x.ProductId == id && x.Color == color);
+            var item = cart.FirstOrDefault(x => x.ProductId == id && x.Name == name && x.Color == color);
+
             if (item != null)
             {
                 item.Quantity += quantity;
@@ -37,13 +48,16 @@ namespace Bloomfiy_final.Controllers
                     Name = name,
                     Price = price,
                     Color = color,
-                    Quantity = quantity
+                    Quantity = quantity,
+                    ImageUrl = $"/Images/products_img/{name.ToLower().Replace(" ", "")}/{name.ToLower().Replace(" ", "")}_{color.ToLower()}.jpg"
                 });
             }
 
             Session[SESSION_CART] = cart;
-            return RedirectToAction("Index");
+            return new HttpStatusCodeResult(200);
         }
+
+
 
         public ActionResult Remove(int id, string color)
         {
@@ -79,5 +93,48 @@ namespace Bloomfiy_final.Controllers
 
             return RedirectToAction("Index", "Checkout");
         }
+
+        [HttpPost]
+        public ActionResult UpdateQuantity(int id, string color, int quantity)
+        {
+            var cart = Session["Bloomfiy.Cart"] as List<CartItem> ?? new List<CartItem>();
+            var item = cart.FirstOrDefault(x => x.ProductId == id && x.Color == color);
+
+            if (item != null)
+            {
+                if (quantity < 1)
+                    cart.Remove(item);
+                else
+                    item.Quantity = quantity;
+            }
+
+            Session["Bloomfiy.Cart"] = cart;
+
+            return Json(new
+            {
+                itemTotal = item != null ? item.TotalPrice : 0,
+                cartTotal = cart.Sum(x => x.TotalPrice)
+            });
+        }
+
+        [HttpGet]
+        public ActionResult GetCartJson()
+        {
+            var cart = Session["Bloomfiy.Cart"] as List<CartItem> ?? new List<CartItem>();
+            return Json(cart, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult RestoreFromLocalStorage(List<CartItem> cart)
+        {
+            if (cart != null && cart.Any())
+            {
+                Session["Bloomfiy.Cart"] = cart;
+            }
+            return new HttpStatusCodeResult(200);
+        }
+
     }
+
 }
+

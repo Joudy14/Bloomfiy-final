@@ -3,6 +3,8 @@
    ======================== */
 .cart-page {
     padding: 150px 20px 70px;
+    padding-top: 120px;
+    padding-bottom: 120px;
     min-height: 70vh;
     background-color: #f9f7f2;
     color: #5a7c5a;
@@ -10,6 +12,7 @@
 }
 
 .cart-page h2 {
+    padding-top: 120px;
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 40px;
@@ -69,7 +72,8 @@
         }
 
 .cart-buttons {
-    margin-top: 20px;
+    margin-top: 40px;
+    margin-bottom: 80px; 
     display: flex;
     justify-content: flex-end;
     gap: 15px;
@@ -88,3 +92,30 @@
         .cart-buttons a:hover {
             background-color: #c19a6b;
         }
+
+.cart-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.cart-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cart-product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.9rem;
+}
+
+.cart-bouquet {
+    color: #5a7c5a;
+    font-weight: 500;
+    font-size: 0.85rem;
+}

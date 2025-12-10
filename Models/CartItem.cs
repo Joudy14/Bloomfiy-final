@@ -11,6 +11,10 @@ namespace Bloomfiy_final.Models
         public decimal Price { get; set; }
         public string Color { get; set; }
         public int Quantity { get; set; }
+        public string ImageUrl { get; set; }
+        public bool HasBouquet { get; set; }
+
+
 
         // Computed property
         public decimal TotalPrice => Price * Quantity;

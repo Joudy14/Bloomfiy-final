@@ -171,7 +171,6 @@
     <Compile Include="Controllers\Admin\AdminCatagoryController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Admin\AdminProductController.cs" />
-    <Compile Include="Controllers\Admin\EventsController.cs" />
     <Compile Include="Controllers\Admin\OrdersController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
