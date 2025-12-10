@@ -20,6 +20,7 @@
             <thead>
                 <tr>
                     <th>Product</th>
+                    <th>Bouquet</th>
                     <th>Color</th>
                     <th>Price</th>
                     <th>Quantity</th>
@@ -31,51 +32,54 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <!-- PRODUCT -->
-                        <td class="cart-product">
-                            <img src="@item.ImageUrl" alt="@item.Name" class="cart-img" />
-                            <div class="cart-product-info">
-                                <strong>@item.Name</strong>
-                            </div>
-                        </td>
+                <tr>
+                    <!-- PRODUCT -->
+                    <td class="cart-product">
+                        <img src="@item.ImageUrl" alt="@item.Name" class="cart-img" />
+                        <div class="cart-product-info">
+                            <strong>@item.Name</strong>
+                        </div>
+                    </td>
 
-                        <!-- COLOR -->
-                        <td class="cart-color">
-                            @item.Color
-                        </td>
+                    <td class=".cart-bouquet">
+                        @item.HasBouquet
+                    </td>
+                    <!-- COLOR -->
+                    <td class="cart-color">
+                        @item.Color
+                    </td>
 
-                        <!-- PRICE (unit price) -->
-                        <td class="cart-price">
-                            $@item.Price
-                        </td>
+                    <!-- PRICE (unit price) -->
+                    <td class="cart-price">
+                        $@item.Price
+                    </td>
 
-                        <!-- QUANTITY -->
-                        <td class="cart-qty"
-                            data-id="@item.ProductId"
-                            data-color="@item.Color"
-                            data-bouquet="@item.HasBouquet">
-                            <button class="qty-btn minus">-</button>
-                            <span class="qty-value">@item.Quantity</span>
-                            <button class="qty-btn plus">+</button>
-                        </td>
+                    <!-- QUANTITY -->
+                    <td class="cart-qty"
+                        data-id="@item.ProductId"
+                        data-color="@item.Color"
+                        data-bouquet="@item.HasBouquet">
+                        <button class="qty-btn minus">-</button>
+                        <span class="qty-value">@item.Quantity</span>
+                        <button class="qty-btn plus">+</button>
+                    </td>
 
-                        <!-- TOTAL -->
-                        <td class="item-total">
-                            $@item.TotalPrice
-                        </td>
+                    <!-- TOTAL -->
+                    <td class="item-total">
+                        $@item.TotalPrice
+                    </td>
 
-                        <!-- ACTION -->
-                        <td>
-                            <a href="@Url.Action(
+                    <!-- ACTION -->
+                    <td>
+                        <a href="@Url.Action(
                 "Remove",
                 "Cart",
                 new { id = item.ProductId, color = item.Color, hasBouquet = item.HasBouquet }
             )" class="action-btn">
-                                Remove
-                            </a>
-                        </td>
-                    </tr>
+                            Remove
+                        </a>
+                    </td>
+                </tr>
                 }
             </tbody>
 

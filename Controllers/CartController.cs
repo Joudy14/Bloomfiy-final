@@ -49,6 +49,7 @@ namespace Bloomfiy_final.Controllers
                     Price = price,
                     Color = color,
                     Quantity = quantity,
+                    HasBouquet = hasBouquet,
                     ImageUrl = $"/Images/products_img/{name.ToLower().Replace(" ", "")}/{name.ToLower().Replace(" ", "")}_{color.ToLower()}.jpg"
                 });
             }

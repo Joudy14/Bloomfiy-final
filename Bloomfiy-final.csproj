@@ -329,10 +329,6 @@
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\shop.js" />
     <Content Include="Scripts\terms.js" />
-    <Content Include="Views\Cart\CustomizeBouquet.txt" />
-    <Content Include="Views\Cart\OrderComplete.txt" />
-    <Content Include="Views\Cart\ReviewBouquet.txt" />
-    <Content Include="Views\Cart\SelectFlowers.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

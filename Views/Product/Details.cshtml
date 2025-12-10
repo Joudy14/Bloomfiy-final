@@ -352,7 +352,6 @@ $('.add-to-cart-btn.large').on('click', function (e) {
     e.preventDefault();
 
     let productId = $(this).data('product-id');
-    let baseName = '@Model.Name';
     let price = unitPrice;
     let quantity = parseInt($('.quantity-input').val()) || 1;
     let color = $('.color-option-detail.active').data('color-name') || '';
@@ -360,7 +359,7 @@ $('.add-to-cart-btn.large').on('click', function (e) {
     let hasBouquet = $('#bouquetOption').is(':checked');
 
     if (hasBouquet) {
-        baseName += ' + Bouquet';
+        hasBouque = ' Bouquet ';
         price += 10;
     }
 
