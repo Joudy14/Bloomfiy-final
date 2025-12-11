@@ -26,15 +26,9 @@
                     <h3>@item.Name</h3>
                     <p class="Wishlist-price">$@item.Price</p>
 
-                    @if (!string.IsNullOrEmpty(item.Color))
-                    {
-                        <p class="Wishlist-color">Color: @item.Color</p>
-                    }
-
                     @using (Html.BeginForm("Remove", "Wishlist", FormMethod.Post))
                     {
                         @Html.Hidden("id", item.ProductId)
-                        @Html.Hidden("color", item.Color)
                         <button class="btn Wishlist-remove-btn">Remove</button>
                     }
                 </div>

@@ -1,7 +1,91 @@
-﻿@{
-    ViewBag.Title = "Details";
+﻿@model Bloomfiy_final.Models.Order
+@{
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="admin-header">
+    <h1>Order #@Model.OrderId</h1>
+    <p>Full details and items for this order.</p>
+</div>
 
-<p>This page is under development. Content coming soon.</p> 
+<div class="admin-content">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="admin-alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <div class="order-admin-info">
+        <div>
+            <p><strong>User ID:</strong> @Model.UserId</p>
+            <p><strong>Date:</strong> @Model.Date.ToString("dd MMM yyyy HH:mm")</p>
+            <p><strong>Total:</strong> $@Model.TotalAmount</p>
+        </div>
+        <div>
+            <p><strong>Name:</strong> @Model.CustomerName</p>
+            <p><strong>City:</strong> @Model.City</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+            <p><strong>Phone:</strong> @Model.Phone</p>
+        </div>
+        <div>
+            <p>
+                <strong>Status:</strong>
+                <span class="badge-status badge-@Model.Status.ToLower()">
+                    @Model.Status
+                </span>
+            </p>
+
+            @using (Html.BeginForm("UpdateStatus", "AdminOrder", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("id", Model.OrderId)
+
+                <label for="status"><strong>Change Status:</strong></label>
+                <select id="status" name="status" class="status-select">
+                    <option value="Pending" @(Model.Status == "Pending" ? "selected" : "")>Pending</option>
+                    <option value="Processing" @(Model.Status == "Processing" ? "selected" : "")>Processing</option>
+                    <option value="Shipped" @(Model.Status == "Shipped" ? "selected" : "")>Shipped</option>
+                    <option value="Delivered" @(Model.Status == "Delivered" ? "selected" : "")>Delivered</option>
+                </select>
+
+                <button type="submit" class="btn-small btn-update" style="margin-top:10px;">
+                    Save
+                </button>
+            }
+        </div>
+    </div>
+
+    <h3 style="margin-top: 30px; margin-bottom: 15px;">Order Items</h3>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Color</th>
+                <th>Bouquet</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Color</td>
+                    <td>@(item.HasBouquet ? "Yes" : "No")</td>
+                    <td>@item.Quantity</td>
+                    <td>$@item.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="@Url.Action("Index", "AdminOrder")" class="btn-small btn-back" style="margin-top:20px; display:inline-block;">
+        ← Back to Orders
+    </a>
+</div>

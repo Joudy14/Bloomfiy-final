@@ -1,0 +1,235 @@
+﻿/* ---------------- MY ORDERS PAGE ---------------- */
+
+.myorders-section {
+    padding: 120px 20px 80px;
+    background: #f9f7f2;
+}
+
+.myorders-title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: #8b7355;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.no-orders {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.myorders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.order-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+    .order-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+.order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+    .order-card-header h3 {
+        color: #5a7c5a;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+.order-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: white;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background: #d4af87;
+}
+
+.status-processing {
+    background: #5a7c5a;
+}
+
+.status-shipped {
+    background: #8b7355;
+}
+
+.status-delivered {
+    background: #4a6c4a;
+}
+
+.order-date,
+.order-total {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.order-details-btn {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 12px 20px;
+    text-decoration: none;
+    background: #5a7c5a;
+    color: white;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+    .order-details-btn:hover {
+        background: #4b6d4b;
+    }
+
+.myorders-profile-btn {
+    display: inline-block;
+    background: #5a7c5a;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: 0.3s ease;
+}
+
+    .myorders-profile-btn:hover {
+        background: #4b6d4b;
+    }
+
+/* ---------------- ORDER DETAILS PAGE ---------------- */
+
+.orderdetails-section {
+    padding: 120px 20px 80px;
+    background: #ffffff;
+}
+
+.orderdetails-title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: #8b7355;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.orderdetails-info-card {
+    background: #faf8f3;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 50px;
+}
+
+    .orderdetails-info-card p {
+        color: #555;
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+
+.orderdetails-subtitle {
+    font-size: 1.8rem;
+    color: #5a7c5a;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* Status Styling */
+.orderdetails-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: white;
+    text-transform: capitalize;
+    font-size: 0.85rem;
+}
+
+.status-pending {
+    background: #d4af87;
+}
+
+.status-processing {
+    background: #5a7c5a;
+}
+
+.status-shipped {
+    background: #8b7355;
+}
+
+.status-delivered {
+    background: #4a6c4a;
+}
+
+/* Items Grid */
+.orderitems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.orderitem-card {
+    background: white;
+    padding: 22px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+    .orderitem-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+.orderitem-info h4 {
+    color: #5a7c5a;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.orderitem-info p {
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.bouquet-label {
+    color: #c26e7c;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Back Button */
+.orderdetails-back-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #5a7c5a;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+    .orderdetails-back-btn:hover {
+        background: #4b6d4b;
+    }

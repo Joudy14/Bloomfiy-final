@@ -1,0 +1,318 @@
+﻿/* ===============================
+   🌸 CATALOG PAGE – BASE
+================================ */
+
+.catalog-page {
+    position: relative;
+    min-height: 100vh;
+    background: url('/Images/catalog-bg.jpg') center / cover no-repeat fixed;
+}
+
+    /* Light overlay */
+    .catalog-page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(249, 247, 242, 0.65);
+        backdrop-filter: blur(1.5px);
+        z-index: 0;
+    }
+
+
+    /* Content above overlay */
+    .catalog-page > * {
+        position: relative;
+        z-index: 1;
+    }
+
+
+
+/* ===============================
+   ✨ HEADER (TITLE AREA)
+================================ */
+
+.catalog-header {
+    text-align: center;
+    padding: 140px 20px 90px;
+}
+
+    .catalog-header h1 {
+        font-size: 5.2rem;
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-style: italic;
+        font-weight: 400;
+        color: #5a7c5a;
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+        text-shadow: 0 10px 30px rgba(90,124,90,0.25);
+        animation: heroFade 1s ease forwards;
+    }
+
+    .catalog-header p {
+        font-size: 1.45rem;
+        font-style: italic;
+        color: #666;
+        max-width: 650px;
+        margin: 0 auto;
+        line-height: 1.8;
+        animation: heroFade 1.2s ease forwards;
+    }
+
+@keyframes heroFade {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* ===============================
+   🧱 LAYOUT
+================================ */
+
+.catalog-layout {
+    display: flex;
+    gap: 35px;
+    background: rgba(255,255,255,0.88);
+    border-radius: 30px 30px 0 0;
+    padding: 60px 40px;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.06);
+}
+
+
+
+/* ===============================
+   🎛️ FILTERS
+================================ */
+
+.catalog-filters {
+    width: 270px;
+    background: #f9f7f2;
+    padding: 28px;
+    border-radius: 16px;
+    position: sticky;
+    top: 140px;
+    height: fit-content;
+}
+
+.filter-group {
+    margin-bottom: 28px;
+}
+
+    .filter-group h3 {
+        font-size: 1rem;
+        color: #5a7c5a;
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.color-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.color-filter {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+    .color-filter:hover {
+        transform: scale(1.15);
+    }
+
+    .color-filter.active {
+        border-color: #5a7c5a;
+        transform: scale(1.2);
+    }
+
+.price-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+
+
+/* ===============================
+   🔀 SORT
+================================ */
+
+.catalog-sort {
+    margin-bottom: 30px;
+}
+
+    .catalog-sort select {
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+
+
+/* ===============================
+   🛍️ PRODUCTS GRID
+================================ */
+
+.catalog-products {
+    flex: 1;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+
+
+/* ===============================
+   🌼 PRODUCT CARD
+================================ */
+
+.product-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+    .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 35px rgba(0,0,0,0.15);
+    }
+
+.product-image {
+    position: relative;
+}
+
+    .product-image img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+
+
+/* ===============================
+   ❤️ WISHLIST
+================================ */
+
+.wishlist-form {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+}
+
+.wishlist-btn {
+    background: rgba(255,255,255,0.9);
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #8b7355;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+    .wishlist-btn:hover {
+        transform: scale(1.15);
+        color: #5a7c5a;
+    }
+
+    .wishlist-btn.active {
+        color: #5a7c5a;
+    }
+
+
+
+/* ===============================
+   📝 PRODUCT INFO
+================================ */
+
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .product-info h3 {
+        color: #5a7c5a;
+        font-size: 1.2rem;
+    }
+
+    .product-info p {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+.product-price {
+    font-weight: bold;
+    color: #5a7c5a;
+}
+
+.view-btn {
+    margin-top: auto;
+    padding: 12px;
+    background: #5a7c5a;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+    .view-btn:hover {
+        background: #4b6d4b;
+    }
+
+
+
+/* ===============================
+   📱 RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+    .catalog-layout {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .catalog-filters {
+        width: 100%;
+        position: static;
+    }
+
+    .catalog-header h1 {
+        font-size: 3.2rem;
+    }
+
+    .catalog-header p {
+        font-size: 1.1rem;
+    }
+}

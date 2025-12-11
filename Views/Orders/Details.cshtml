@@ -1,0 +1,52 @@
+﻿@model Bloomfiy_final.Models.Order
+@{
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="orderdetails-section">
+    <div class="container">
+
+        <h2 class="orderdetails-title">Order #@Model.OrderId</h2>
+
+        <div class="orderdetails-info-card">
+            <p>
+                <strong>Status:</strong>
+                <span class="orderdetails-status status-@Model.Status.ToLower()">@Model.Status</span>
+            </p>
+            <p><strong>Date:</strong> @Model.Date.ToString("dd MMM yyyy")</p>
+            <p><strong>Total:</strong> $@Model.TotalAmount</p>
+
+            <h3 class="orderdetails-subtitle">Delivery Information</h3>
+            <p><strong>Name:</strong> @Model.CustomerName</p>
+            <p><strong>City:</strong> @Model.City</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+            <p><strong>Phone:</strong> @Model.Phone</p>
+        </div>
+
+        <h3 class="orderdetails-subtitle">Order Items</h3>
+
+        <div class="orderitems-grid">
+            @foreach (var item in Model.Items)
+            {
+                <div class="orderitem-card">
+                    <div class="orderitem-info">
+                        <h4>@item.ProductName</h4>
+
+                        <p><strong>Color:</strong> @item.Color</p>
+
+                        @if (item.HasBouquet)
+                        {
+                            <p class="bouquet-label">+ Bouquet Wrap</p>
+                        }
+
+                        <p><strong>Quantity:</strong> @item.Quantity</p>
+                        <p><strong>Price:</strong> $@item.Price</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <a href="/Orders/MyOrders" class="orderdetails-back-btn">← Back to My Orders</a>
+    </div>
+</section>

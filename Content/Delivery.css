@@ -4,8 +4,8 @@
     margin-top: 6.6rem;
 }
 
-.page-hero {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('delivery-hero.jpg') center/cover;
+.infopage-hero {
+    background: url('/Images/info-bg.jpg') center/cover;
     padding: 100px 0;
     text-align: center;
     color: white;

@@ -1,30 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNet.Identity;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Bloomfiy_final.Models;
+using Microsoft.AspNet.Identity;
 
-
-namespace Bloomfiy_final.Controllers
+public class OrdersController : Controller
 {
+    private ApplicationDbContext db = new ApplicationDbContext();
+
     [Authorize]
-    public class OrdersController : Controller
+    public ActionResult MyOrders()
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        string userId = User.Identity.GetUserId();
 
-        public ActionResult MyOrders()
-        {
-            var userId = User.Identity.GetUserId();
+        var orders = db.Orders
+                       .Where(o => o.UserId == userId)
+                       .OrderByDescending(o => o.Date)
+                       .ToList();
 
-            var orders = db.Orders
-                .Where(o => o.UserId == userId)
-                .OrderByDescending(o => o.OrderDate)
-                .ToList();
-
-            return View(orders);
-        }
+        return View(orders);
     }
 
+    [Authorize]
+    public ActionResult Details(int id)
+    {
+        var order = db.Orders
+                       .Include("Items")
+                       .FirstOrDefault(o => o.OrderId == id);
+
+        if (order == null)
+            return HttpNotFound();
+
+        // safety: user must own the order
+        if (order.UserId != User.Identity.GetUserId())
+            return new HttpUnauthorizedResult();
+
+        return View(order);
+    }
 }

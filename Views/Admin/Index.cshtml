@@ -3,12 +3,43 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="admin-header">
+    <h1>Dashboard Overview</h1>
+    <p>Welcome back, Admin 🌿</p>
+</div>
+
 <section class="admin-dashboard">
-    <div class="admin-header">
-        <h1>Admin Dashboard</h1>
-        <p>Welcome back, Admin 👋</p>
+
+    <!-- ==== TOP STATS ==== -->
+    <div class="admin-stats">
+        <div class="stat-card">
+            <h3>@ViewBag.TotalOrders</h3>
+            <p>Total Orders</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>@ViewBag.PendingOrders</h3>
+            <p>Pending</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>@ViewBag.DeliveredOrders</h3>
+            <p>Delivered</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>@ViewBag.TotalProducts</h3>
+            <p>Products</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>@ViewBag.TotalUsers</h3>
+            <p>Users</p>
+        </div>
     </div>
 
+
+    <!-- ==== MAIN GRID ==== -->
     <div class="admin-grid">
 
         <a href="@Url.Action("Index", "AdminProduct")" class="admin-card">
@@ -18,17 +49,17 @@
 
         <a href="@Url.Action("Index", "AdminOrder")" class="admin-card">
             <h3>Orders</h3>
-            <p>View & update orders status</p>
+            <p>View & update orders</p>
         </a>
 
         <a href="@Url.Action("Index", "AdminEvent")" class="admin-card">
             <h3>Events</h3>
-            <p>Event booking requests</p>
+            <p>Manage event bookings</p>
         </a>
 
         <a href="@Url.Action("Index", "AdminUser")" class="admin-card">
             <h3>Users</h3>
-            <p>Registered users</p>
+            <p>Registered customers</p>
         </a>
 
     </div>

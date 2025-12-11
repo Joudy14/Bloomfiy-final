@@ -39,7 +39,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Insert after last-updated div
         const lastUpdated = document.querySelector('.last-updated');
-        lastUpdated.parentNode.insertBefore(tocContainer, lastUpdated.nextSibling);
+
+        if (lastUpdated && lastUpdated.parentNode) {
+            lastUpdated.parentNode.insertBefore(tocContainer, lastUpdated.nextSibling);
+        } else {
+            // fallback: insert at top of terms page
+            const termsPage = document.querySelector('.terms-page') || document.body;
+            termsPage.prepend(tocContainer);
+        }
+
         
         // Add TOC styles
         const style = document.createElement('style');

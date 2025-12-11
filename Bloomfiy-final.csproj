@@ -168,10 +168,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Admin\AdminCatagoryController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Admin\AdminProductController.cs" />
-    <Compile Include="Controllers\Admin\OrdersController.cs" />
+    <Compile Include="Controllers\Admin\AdminOrdersController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\EventController.cs" />
@@ -249,6 +248,8 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductColor.cs" />
     <Content Include="Content\Checkout.css" />
+    <Content Include="Content\MyOrder.css" />
+    <Content Include="Content\Wishlist.css" />
     <Content Include="Images\about-image.jpg" />
     <Content Include="Images\aboutbg_pic.jpg" />
     <Content Include="Images\aboutintro.jpg" />
@@ -261,6 +262,7 @@
     <Content Include="Images\blog\spring-care.jpg" />
     <Content Include="Images\blog\wedding-bouquets.jpg" />
     <Content Include="Images\blommpic1.jpg" />
+    <Content Include="Images\catalog-bg.jpg" />
     <Content Include="Images\eco.jpg" />
     <Content Include="Images\event.jpg" />
     <Content Include="Images\eventbg.jpg" />
@@ -269,6 +271,7 @@
     <Content Include="Images\events\corporate.jpg" />
     <Content Include="Images\events\wedding.jpg" />
     <Content Include="Images\fresh.jpg" />
+    <Content Include="Images\info-bg.jpg" />
     <Content Include="Images\joud.png" />
     <Content Include="Images\layan.png" />
     <Content Include="Images\maftuna.png" />
@@ -300,14 +303,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cart.css" />
-    <Content Include="Content\DeliveryInfo.css" />
+    <Content Include="Content\Delivery.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\event.css" />
     <Content Include="Content\faq.css" />
     <Content Include="Content\Privacy.css" />
     <Content Include="Content\Profile.css" />
     <Content Include="Content\refund.css" />
-    <Content Include="Content\shop.css" />
+    <Content Include="Content\catalog.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\terms.css" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -339,7 +342,7 @@
     <Content Include="Scripts\product-details.js" />
     <Content Include="Scripts\refund.js" />
     <Content Include="Scripts\script.js" />
-    <Content Include="Scripts\shop.js" />
+    <Content Include="Scripts\catalog.js" />
     <Content Include="Scripts\terms.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -397,10 +400,7 @@
     <Content Include="Views\Information\PrivacyPolicy.cshtml" />
     <Content Include="Views\Information\RefundPolicy.cshtml" />
     <Content Include="Views\Information\TermsOfService.cshtml" />
-    <Content Include="Views\Order\Confirmation.cshtml" />
-    <Content Include="Views\Order\Details.cshtml" />
-    <Content Include="Views\Order\History.cshtml" />
-    <Content Include="Views\Order\Tracking.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Product\Catalog.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Manage\EditProfile.cshtml" />
@@ -409,7 +409,7 @@
     <Content Include="Views\Blog\Post1.cshtml" />
     <Content Include="Views\Blog\Post2.cshtml" />
     <Content Include="Views\Blog\Post3.cshtml" />
-    <Content Include="Views\Manage\MyOrders.cshtml" />
+    <Content Include="Views\Orders\MyOrders.cshtml" />
     <Content Include="Views\Checkout\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Bloomfiy_final.Models.Order>
+@{
+    ViewBag.Title = "My Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="myorders-section">
+    <div class="container">
+        <h2 class="myorders-title">My Orders</h2>
+
+        @if (!Model.Any())
+        {
+            <p class="no-orders">You have no orders yet 💐</p>
+        }
+        else
+        {
+            <div class="myorders-grid">
+                @foreach (var order in Model)
+                {
+                    <div class="order-card">
+                        <div class="order-card-header">
+                            <h3>Order #@order.OrderId</h3>
+                            <span class="order-status status-@order.Status.ToLower()">
+                                @order.Status
+                            </span>
+                        </div>
+
+                        <p class="order-date">
+                            <strong>Date:</strong> @order.Date.ToString("dd MMM yyyy")
+                        </p>
+
+                        <p class="order-total">
+                            <strong>Total:</strong> $@order.TotalAmount
+                        </p>
+
+                        <a href="@Url.Action("Details", "Orders", new { id = order.OrderId })"
+                           class="order-details-btn">
+                            View Details →
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

@@ -44,6 +44,23 @@
                     </div>
                 }
             </div>
+            @{
+                var wishlist = Session["Bloomfiy.Wishlist"] as List<Bloomfiy_final.Models.WishlistItem>;
+                bool isFav = wishlist != null && wishlist.Any(w => w.ProductId == Model.ProductId);
+            }
+
+            <form class="wishlist-form">
+                <input type="hidden" name="id" value="@Model.ProductId" />
+                <input type="hidden" name="name" value="@Model.Name" />
+                <input type="hidden" name="price" value="@Model.BasePrice" />
+                <input type="hidden" name="imageUrl" value="@Model.DefaultImageUrl" />
+
+                <button type="submit"
+                        class="wishlist-btn @(isFav ? "active" : "")"
+                        title="Add to wishlist">
+                    ♥
+                </button>
+            </form>
 
             <!-- Info Image Section -->
             @if (!string.IsNullOrEmpty(Model.InfoImageUrl))

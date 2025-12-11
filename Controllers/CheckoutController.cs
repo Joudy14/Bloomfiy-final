@@ -3,6 +3,8 @@ using System.Linq;
 using System.Web.Mvc;
 using Bloomfiy_final.Models;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
+
 
 namespace Bloomfiy_final.Controllers
 {
@@ -27,36 +29,33 @@ namespace Bloomfiy_final.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult PlaceOrder(CheckoutInputModel input)
+        public ActionResult PlaceOrder(CheckoutViewModel model)
         {
-            var cart = Session["Bloomfiy.Cart"] as System.Collections.Generic.List<CartItem>
-                       ?? new System.Collections.Generic.List<CartItem>();
+            var cart = Session["Bloomfiy.Cart"] as List<CartItem>
+                       ?? new List<CartItem>();
 
             if (!cart.Any())
                 return RedirectToAction("Index", "Cart");
 
-            if (string.IsNullOrWhiteSpace(input.FullName))
+            if (string.IsNullOrWhiteSpace(model.Input.FullName))
                 ModelState.AddModelError("", "Name is required.");
 
             if (!ModelState.IsValid)
             {
-                CheckoutViewModel vm = new CheckoutViewModel
-                {
-                    CartItems = cart,
-                    Input = input
-                };
-                return View("Index", vm);
+                model.CartItems = cart;
+                return View("Index", model);
             }
 
             var order = new Order
             {
                 UserId = User.Identity.GetUserId(),
-                CustomerName = input.FullName,
-                Address = input.Address,
-                City = input.City,
-                Phone = input.Phone,
+                CustomerName = model.Input.FullName,
+                Address = model.Input.Address,
+                City = model.Input.City,
+                Phone = model.Input.Phone,
                 TotalAmount = cart.Sum(x => x.TotalPrice),
                 Date = DateTime.Now,
+                OrderDate = DateTime.Now,
                 Status = "Pending",
                 Items = cart.Select(x => new OrderItem
                 {
@@ -76,6 +75,7 @@ namespace Bloomfiy_final.Controllers
 
             return RedirectToAction("Success");
         }
+
 
         public ActionResult Success()
         {

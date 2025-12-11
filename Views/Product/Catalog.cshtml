@@ -8,6 +8,7 @@
     var colors = ViewBag.Colors as List<Bloomfiy_final.Models.Color>;
 }
 
+
 <section class="catalog-page">
 
     <!-- HEADER -->
@@ -76,38 +77,54 @@
             <div class="products-grid" id="productsGrid">
                 @foreach (var product in Model)
                 {
-                <div class="product-card"
-                     data-product-id="@product.ProductId"
-                     data-category="@product.CategoryId"
-                     data-price="@product.BasePrice"
-                     data-colors="@string.Join(",", product.ProductColors.Select(pc => pc.ColorId))">
+                    <div class="product-card"
+                         data-product-id="@product.ProductId"
+                         data-category="@product.CategoryId"
+                         data-price="@product.BasePrice"
+                         data-colors="@string.Join(",", product.ProductColors.Select(pc => pc.ColorId))">
 
 
-                    <div class="product-image">
-                        <img src="@product.DefaultImageUrl" alt="@product.Name">
-                        <button class="wishlist-btn" data-id="@product.ProductId">♡</button>
-                    </div>
+                        <div class="product-image">
+                            <img src="@product.DefaultImageUrl" alt="@product.Name">
+                            @{
+                                var wishlistIds = ViewBag.WishlistIds as List<int> ?? new List<int>();
+                            }
 
-                    <div class="product-info">
-                        <h3>@product.Name</h3>
+                        <form class="wishlist-form">
+                            <input type="hidden" name="id" value="@product.ProductId" />
+                            <input type="hidden" name="name" value="@product.Name" />
+                            <input type="hidden" name="price" value="@product.BasePrice" />
+                            <input type="hidden" name="imageUrl" value="@product.DefaultImageUrl" />
 
-                        <p>
-                            @(product.Description?.Length > 80
-                                    ? product.Description.Substring(0, 80) + "..."
-                                    : product.Description)
-                        </p>
+                            <button type="submit"
+                                    class="wishlist-btn @(wishlistIds.Contains(product.ProductId) ? "active" : "")">
+                                ♥
+                            </button>
 
-                        <div class="product-price">
-                            From $@product.BasePrice
+                        </form>
+
                         </div>
 
-                        <a href="@Url.Action("Details", "Product", new { id = product.ProductId })"
-                           class="view-btn">
-                            View Details
-                        </a>
-                    </div>
+                        <div class="product-info">
+                            <h3>@product.Name</h3>
 
-                </div>
+                            <p>
+                                @(product.Description?.Length > 80
+                                    ? product.Description.Substring(0, 80) + "..."
+                                    : product.Description)
+                            </p>
+
+                            <div class="product-price">
+                                From $@product.BasePrice
+                            </div>
+
+                            <a href="@Url.Action("Details", "Product", new { id = product.ProductId })"
+                               class="view-btn">
+                                View Details
+                            </a>
+                        </div>
+
+                    </div>
                 }
             </div>
 
@@ -118,5 +135,5 @@
 </section>
 
 @section Scripts {
-    <script src="~/Scripts/shop.js"></script>
+    <script src="~/Scripts/catalog.js"></script>
 }

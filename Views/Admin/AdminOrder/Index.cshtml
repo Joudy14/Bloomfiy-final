@@ -1,7 +1,73 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<Bloomfiy_final.Models.Order>
+@{
+    ViewBag.Title = "Manage Orders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="admin-header">
+    <h1>Orders</h1>
+    <p>View and manage all customer orders.</p>
+</div>
 
-<p>This page is under development. Content coming soon.</p> 
+<div class="admin-content">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="admin-alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Order #</th>
+                <th>User ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Items</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var o in Model)
+            {
+                <tr>
+                    <td>@o.OrderId</td>
+                    <td>@o.UserId</td>
+                    <td>@o.Date.ToString("dd MMM yyyy")</td>
+                    <td>$@o.TotalAmount</td>
+                    <td>
+                        <span class="badge-status badge-@o.Status.ToLower()">
+                            @o.Status
+                        </span>
+                    </td>
+                    <td>@(o.Items != null ? o.Items.Count : 0)</td>
+                    <td class="admin-actions">
+                        <a href="@Url.Action("Details", "AdminOrder", new { id = o.OrderId })"
+                           class="btn-small btn-details">
+                            Details
+                        </a>
+
+                        @using (Html.BeginForm("UpdateStatus", "AdminOrder", FormMethod.Post, new { @class = "inline-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("id", o.OrderId)
+
+                            <select name="status" class="status-select">
+                                <option value="Pending" @(o.Status == "Pending" ? "selected" : "")>Pending</option>
+                                <option value="Processing" @(o.Status == "Processing" ? "selected" : "")>Processing</option>
+                                <option value="Shipped" @(o.Status == "Shipped" ? "selected" : "")>Shipped</option>
+                                <option value="Delivered" @(o.Status == "Delivered" ? "selected" : "")>Delivered</option>
+                            </select>
+
+                            <button type="submit" class="btn-small btn-update">Save</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

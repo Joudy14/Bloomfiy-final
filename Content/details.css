@@ -483,3 +483,6 @@
         transform: scale(1.2);
     }
 
+.details-page .wishlist-btn {
+    font-size: 26px;
+}
