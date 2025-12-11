@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Bloomfiy_final.Models;
@@ -7,51 +6,48 @@ using Microsoft.AspNet.Identity;
 
 namespace Bloomfiy_final.Controllers
 {
-    [Authorize]  // ⬅ user must be logged in
     public class CheckoutController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private const string SESSION_CART = "Bloomfiy.Cart";
 
-        // GET: Checkout
+        [Authorize]
         public ActionResult Index()
         {
-            var cart = Session[SESSION_CART] as List<CartItem>;
+            var cart = Session["Bloomfiy.Cart"] as System.Collections.Generic.List<CartItem>
+                       ?? new System.Collections.Generic.List<CartItem>();
 
-            if (cart == null || !cart.Any())
-            {
-                TempData["Message"] = "Your cart is empty!";
-                return RedirectToAction("Index", "Cart");
-            }
-
-            var model = new CheckoutViewModel
+            CheckoutViewModel vm = new CheckoutViewModel
             {
                 CartItems = cart,
-                Total = cart.Sum(x => x.TotalPrice)
+                Input = new CheckoutInputModel()
             };
 
-            return View(model);
+            return View(vm);
         }
 
-        // POST: Checkout
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ProcessOrder(CheckoutInputModel input)
+        [Authorize]
+        public ActionResult PlaceOrder(CheckoutInputModel input)
         {
+            var cart = Session["Bloomfiy.Cart"] as System.Collections.Generic.List<CartItem>
+                       ?? new System.Collections.Generic.List<CartItem>();
+
+            if (!cart.Any())
+                return RedirectToAction("Index", "Cart");
+
+            if (string.IsNullOrWhiteSpace(input.FullName))
+                ModelState.AddModelError("", "Name is required.");
+
             if (!ModelState.IsValid)
             {
-                TempData["Error"] = "Please fill in all fields correctly.";
-                return RedirectToAction("Index");
+                CheckoutViewModel vm = new CheckoutViewModel
+                {
+                    CartItems = cart,
+                    Input = input
+                };
+                return View("Index", vm);
             }
 
-            var cart = Session[SESSION_CART] as List<CartItem>;
-            if (cart == null || !cart.Any())
-            {
-                TempData["Error"] = "Cart empty.";
-                return RedirectToAction("Index", "Cart");
-            }
-
-            // Create Order
             var order = new Order
             {
                 UserId = User.Identity.GetUserId(),
@@ -59,49 +55,31 @@ namespace Bloomfiy_final.Controllers
                 Address = input.Address,
                 City = input.City,
                 Phone = input.Phone,
-                PaymentMethod = "Credit Card",
-                CreatedAt = DateTime.Now,
+                TotalAmount = cart.Sum(x => x.TotalPrice),
+                Date = DateTime.Now,
                 Status = "Pending",
-                TotalAmount = cart.Sum(x => x.TotalPrice)
+                Items = cart.Select(x => new OrderItem
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.Name,
+                    Color = x.Color,
+                    HasBouquet = x.HasBouquet,
+                    Quantity = x.Quantity,
+                    Price = x.Price
+                }).ToList()
             };
 
             db.Orders.Add(order);
             db.SaveChanges();
 
-            // Add Order Items
-            foreach (var cartItem in cart)
-            {
-                var orderItem = new OrderItem
-                {
-                    OrderId = order.OrderId,
-                    ProductId = cartItem.ProductId,
-                    Quantity = cartItem.Quantity,
-                    Price = cartItem.Price,
-                    Color = cartItem.Color,
-                    ImageUrl = cartItem.ImageUrl,
-                    HasBouquet = cartItem.HasBouquet
-                };
+            Session["Bloomfiy.Cart"] = null;
 
-                db.OrderItems.Add(orderItem);
-            }
-
-            db.SaveChanges();
-
-            // Clear cart
-            Session[SESSION_CART] = null;
-
-            return RedirectToAction("Success", new { id = order.OrderId });
+            return RedirectToAction("Success");
         }
 
-        // ORDER SUCCESS PAGE
-        public ActionResult Success(int id)
+        public ActionResult Success()
         {
-            var order = db.Orders.FirstOrDefault(o => o.OrderId == id);
-
-            if (order == null)
-                return RedirectToAction("Index", "Home");
-
-            return View(order);
+            return View();
         }
     }
 }

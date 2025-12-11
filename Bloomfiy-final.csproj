@@ -229,11 +229,16 @@
     <Compile Include="Migrations\202512102306042_AddOrders.Designer.cs">
       <DependentUpon>202512102306042_AddOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202512111457071_AddOrderDateToOrder.cs" />
+    <Compile Include="Migrations\202512111457071_AddOrderDateToOrder.Designer.cs">
+      <DependentUpon>202512111457071_AddOrderDateToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\CheckoutInputModels.cs" />
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\EditProfileViewModel.cs" />
@@ -441,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512102306042_AddOrders.resx">
       <DependentUpon>202512102306042_AddOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512111457071_AddOrderDateToOrder.resx">
+      <DependentUpon>202512111457071_AddOrderDateToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

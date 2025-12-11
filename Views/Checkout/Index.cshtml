@@ -4,79 +4,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="checkout-page container">
-    <h2>Checkout</h2>
-
-    @if (TempData["Error"] != null)
-    {
-        <div class="checkout-error">@TempData["Error"]</div>
-    }
+<section class="checkout-container">
+    <h1 class="checkout-title">Checkout</h1>
 
     <div class="checkout-grid">
 
-        <!-- LEFT SIDE: FORM -->
-        <form method="post" action="/Checkout/ProcessOrder" class="checkout-form">
-            @Html.AntiForgeryToken()
+        <!-- LEFT SIDE - FORM -->
+        <div class="checkout-form">
 
-            <h3>Billing Details</h3>
-
-            <label>Full Name</label>
-            <input type="text" name="FullName" required />
-
-            <label>Phone Number</label>
-            <input type="text" name="Phone" required />
-
-            <label>City</label>
-            <input type="text" name="City" required />
-
-            <label>Address</label>
-            <textarea name="Address" required></textarea>
-
-            <h3>Payment Method</h3>
-
-            <div class="fake-card">
-                <label>Card Number</label>
-                <input type="text" maxlength="16" required />
-
-                <label>Expiration</label>
-                <div class="expiration">
-                    <input type="text" placeholder="MM" maxlength="2" required />
-                    <input type="text" placeholder="YY" maxlength="2" required />
-                </div>
-
-                <label>CVV</label>
-                <input type="text" maxlength="3" required />
-            </div>
-
-            <button class="place-order-btn">Place Order</button>
-        </form>
-
-        <!-- RIGHT SIDE: ORDER SUMMARY -->
-        <div class="checkout-summary">
-            <h3>Your Order</h3>
-
-            @foreach (var item in Model.CartItems)
+            @using (Html.BeginForm("PlaceOrder", "Checkout", FormMethod.Post))
             {
-                <div class="summary-item">
-                    <img src="@item.ImageUrl" />
-                    <div>
-                        <strong>@item.Name</strong>
-                        <div>Color: @item.Color</div>
-                        <div>Qty: @item.Quantity</div>
+                <h2 class="section-title">Shipping Information</h2>
 
-                        @if (item.HasBouquet)
-                        {
-                            <div class="bouquet-tag">+ Bouquet Wrap</div>
-                        }
-                    </div>
-                    <span>$@item.TotalPrice</span>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    @Html.TextBoxFor(m => m.Input.FullName, new { @class = "input" })
+                    @Html.ValidationMessageFor(m => m.Input.FullName)
                 </div>
-            }
 
-            <div class="summary-total">
-                <strong>Total:</strong> $@Model.Total
-            </div>
+                <div class="input-group">
+                    <label>Address</label>
+                    @Html.TextBoxFor(m => m.Input.Address, new { @class = "input" })
+                </div>
+
+                <div class="input-group">
+                    <label>City</label>
+                    @Html.TextBoxFor(m => m.Input.City, new { @class = "input" })
+                </div>
+
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    @Html.TextBoxFor(m => m.Input.Phone, new { @class = "input" })
+                </div>
+
+                <h2 class="section-title">Payment Details</h2>
+
+                <div class="input-group">
+                    <label>Card Number</label>
+                    <input type="text" class="input" placeholder="1234 5678 9012 3456" required />
+                </div>
+
+                <div class="payment-row">
+                    <div class="input-group small">
+                        <label>Expiration</label>
+                        <input type="text" class="input" placeholder="MM/YY" required />
+                    </div>
+
+                    <div class="input-group small">
+                        <label>CVV</label>
+                        <input type="text" class="input" placeholder="123" required />
+                    </div>
+                </div>
+
+                <button type="submit" class="place-order-btn">Place Order</button>
+            }
         </div>
 
+        <!-- RIGHT SIDE - SUMMARY -->
+        <div class="checkout-summary">
+            <h2 class="section-title">Order Summary</h2>
+
+            <div class="summary-items">
+                @foreach (var item in Model.CartItems)
+                {
+                    <div class="summary-item">
+                        <img src="@item.ImageUrl" class="summary-img" alt="@item.Name" />
+
+                        <div class="summary-info">
+                            <strong>@item.Name</strong>
+                            <span>Color: @item.Color</span>
+
+                            @if (item.HasBouquet)
+                            {
+                                <span class="bouquet-tag">+ Bouquet Wrap</span>
+                            }
+
+                            <span>Qty: @item.Quantity</span>
+                        </div>
+
+                        <div class="summary-price">
+                            $@item.TotalPrice
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="summary-total">
+                <span>Total:</span>
+                <strong>$@Model.CartItems.Sum(x => x.TotalPrice)</strong>
+            </div>
+        </div>
     </div>
 </section>
