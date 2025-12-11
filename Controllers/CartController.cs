@@ -90,8 +90,6 @@ namespace Bloomfiy_final.Controllers
 
             Session["CheckoutCart"] = cart;
 
-            Session[SESSION_CART] = null;
-
             return RedirectToAction("Index", "Checkout");
         }
 

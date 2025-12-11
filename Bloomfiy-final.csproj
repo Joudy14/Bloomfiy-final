@@ -409,7 +409,7 @@
     <Content Include="Views\Blog\Post1.cshtml" />
     <Content Include="Views\Blog\Post2.cshtml" />
     <Content Include="Views\Blog\Post3.cshtml" />
-    <Content Include="Views\Manage\View.cshtml" />
+    <Content Include="Views\Manage\MyOrders.cshtml" />
     <Content Include="Views\Checkout\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>

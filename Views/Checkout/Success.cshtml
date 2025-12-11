@@ -1,14 +1,14 @@
-﻿@model Bloomfiy_final.Models.Order
-@{
+﻿@{
+    ViewBag.Title = "Order Successful";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Order Success";
 }
 
-<section class="checkout-success container">
-    <h2>🎉 Order Placed Successfully!</h2>
+<section class="checkout-success">
+    <div class="success-box">
+        <h2>🎉 Your order has been placed!</h2>
+        <p>Thank you for shopping with us. You can track your order in <strong>My Orders</strong>.</p>
 
-    <p>Your order number is <strong>#@Model.OrderId</strong></p>
-
-    <a href="/Order/MyOrders" class="btn-view-orders">View My Orders</a>
-    <a href="/" class="btn-home">Back to Home</a>
+        <a href="/Orders/MyOrders" class="btn-order">View My Orders</a>
+        <a href="/" class="btn-home">Back to Home</a>
+    </div>
 </section>

@@ -5,94 +5,92 @@
 }
 
 <section class="checkout-container">
-    <h1 class="checkout-title">Checkout</h1>
+
+    <h2 class="checkout-title">Checkout</h2>
 
     <div class="checkout-grid">
 
-        <!-- LEFT SIDE - FORM -->
-        <div class="checkout-form">
+        <!-- ORDER SUMMARY -->
+        <div class="checkout-summary-box">
+            <h2 class="summary-title">Order Summary</h2>
 
-            @using (Html.BeginForm("PlaceOrder", "Checkout", FormMethod.Post))
+            @foreach (var item in Model.CartItems)
             {
-                <h2 class="section-title">Shipping Information</h2>
-
-                <div class="input-group">
-                    <label>Full Name</label>
-                    @Html.TextBoxFor(m => m.Input.FullName, new { @class = "input" })
-                    @Html.ValidationMessageFor(m => m.Input.FullName)
-                </div>
-
-                <div class="input-group">
-                    <label>Address</label>
-                    @Html.TextBoxFor(m => m.Input.Address, new { @class = "input" })
-                </div>
-
-                <div class="input-group">
-                    <label>City</label>
-                    @Html.TextBoxFor(m => m.Input.City, new { @class = "input" })
-                </div>
-
-                <div class="input-group">
-                    <label>Phone Number</label>
-                    @Html.TextBoxFor(m => m.Input.Phone, new { @class = "input" })
-                </div>
-
-                <h2 class="section-title">Payment Details</h2>
-
-                <div class="input-group">
-                    <label>Card Number</label>
-                    <input type="text" class="input" placeholder="1234 5678 9012 3456" required />
-                </div>
-
-                <div class="payment-row">
-                    <div class="input-group small">
-                        <label>Expiration</label>
-                        <input type="text" class="input" placeholder="MM/YY" required />
-                    </div>
-
-                    <div class="input-group small">
-                        <label>CVV</label>
-                        <input type="text" class="input" placeholder="123" required />
-                    </div>
-                </div>
-
-                <button type="submit" class="place-order-btn">Place Order</button>
-            }
-        </div>
-
-        <!-- RIGHT SIDE - SUMMARY -->
-        <div class="checkout-summary">
-            <h2 class="section-title">Order Summary</h2>
-
-            <div class="summary-items">
-                @foreach (var item in Model.CartItems)
-                {
-                    <div class="summary-item">
-                        <img src="@item.ImageUrl" class="summary-img" alt="@item.Name" />
+                <div class="summary-item">
+                    <div class="summary-item-left">
+                        <img src="@item.ImageUrl" alt="@item.Name" class="summary-img" />
 
                         <div class="summary-info">
-                            <strong>@item.Name</strong>
-                            <span>Color: @item.Color</span>
+                            <h3>@item.Name</h3>
+
+                            <p class="summary-color">Color: @item.Color</p>
 
                             @if (item.HasBouquet)
                             {
-                                <span class="bouquet-tag">+ Bouquet Wrap</span>
+                                <p class="summary-bouquet">🌸 Bouquet Wrap (+$10)</p>
                             }
-
-                            <span>Qty: @item.Quantity</span>
-                        </div>
-
-                        <div class="summary-price">
-                            $@item.TotalPrice
                         </div>
                     </div>
-                }
-            </div>
 
-            <div class="summary-total">
+                    <div class="summary-item-right">
+                        <span class="summary-qty">x @item.Quantity</span>
+                        <span class="summary-total">$@item.TotalPrice</span>
+                    </div>
+                </div>
+            }
+
+            <div class="summary-total-box">
                 <span>Total:</span>
-                <strong>$@Model.CartItems.Sum(x => x.TotalPrice)</strong>
+                <span class="summary-grand-total">
+                    $@Model.CartItems.Sum(x => x.TotalPrice)
+                </span>
             </div>
         </div>
+
+
+        <!-- RIGHT SIDE – FORM -->
+        <div class="checkout-form">
+            <h3>Billing Details</h3>
+
+            @using (Html.BeginForm("PlaceOrder", "Checkout", FormMethod.Post))
+            {
+                <label>Full Name</label>
+                @Html.TextBoxFor(m => m.Input.FullName, new { @class = "input-field" })
+                @Html.ValidationMessageFor(m => m.Input.FullName)
+
+                <label>City</label>
+                @Html.TextBoxFor(m => m.Input.City, new { @class = "input-field" })
+
+                <label>Address</label>
+                @Html.TextBoxFor(m => m.Input.Address, new { @class = "input-field" })
+
+                <label>Phone Number</label>
+                @Html.TextBoxFor(m => m.Input.Phone, new { @class = "input-field" })
+
+                <h3 class="payment-title">Payment Method</h3>
+
+                <div class="credit-card-box">
+                    <label>Card Number</label>
+                    <input type="text" class="input-field" placeholder="1234 5678 9012 3456" required />
+
+                    <div class="card-row">
+                        <div>
+                            <label>Expiry</label>
+                            <input type="text" class="input-field" placeholder="MM/YY" required />
+                        </div>
+                        <div>
+                            <label>CVC</label>
+                            <input type="text" class="input-field" placeholder="123" required />
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="place-order-btn">
+                    ✔ Place Order ($@Model.CartItems.Sum(x => x.TotalPrice))
+                </button>
+            }
+        </div>
+
     </div>
+
 </section>
