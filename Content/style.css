@@ -1537,3 +1537,22 @@ opacity: 0.9;
     margin-left: 12px;
     display: inline-block;
 }
+
+/*ADMIN BUTTON */
+.admin-btn {
+    background-color: #5a7c5a;
+    color: #fff !important;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 400;
+    text-decoration: none !important;
+    
+    display: inline-block;
+    transition: 0.3s ease;
+   
+}
+
+    .admin-btn:hover {
+        background-color: #c19a6b;
+    }
+

@@ -73,12 +73,12 @@
             <!-- Wishlist Icon -->
             <a href="@Url.Action("Index", "Wishlist")" class="action-icon wishlist-icon" title="Wishlist">
                 ♡
-               
+
             </a>
 
             <!-- Cart -->
             <a href="@Url.Action("Index", "Cart")" class="action-icon cart-icon" title="Cart">
-                🛒 
+                🛒
             </a>
 
 
@@ -97,7 +97,8 @@
             }
             @if (User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("Index", "Admin")">Admin</a>
+                <a href="@Url.Action("Index", "Admin")" class="admin-btn">Admin</a>
+
             }
 
 
