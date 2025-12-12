@@ -1,4 +1,4 @@
-html, body {
+﻿html, body {
     font-size: 16px !important;
     line-height: 1.6 !important;
     font-family: 'Times New Roman', serif !important;
@@ -351,7 +351,7 @@ header nav ul {
 }
 
 
-/* Hero Section � Home */
+/* Hero Section – Home */
 #header-hero {
     width: 100%;
     display: block;
@@ -859,6 +859,27 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+.subscribe-success {
+    display: none !important;
+    margin-top: 15px;
+    color: #d4af87;
+    font-style: italic;
+    font-size: 0.9rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 
 
@@ -1029,31 +1050,34 @@ opacity: 0.9;
 }
 
 /* Hero Section  */
-.about .hero {
-    height: 70vh; 
-    margin-bottom: 90rm; 
+.hero {
+    position: relative;
+    height: 55vh; 
+    min-height: 420px;
+    overflow: hidden;
 }
 
-.about .hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.about .hero-overlay {
+
+.hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: 60%; /* 👈 هنا الطول */
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    color: white;
-    padding: 2rem;
+    background: rgba(0,0,0,0.35);
+    z-index: 1;
+    pointer-events: none; /* 🔑 مهم */
 }
+
 
 .about .hero-overlay h1 {
     font-family: 'Georgia', 'Times New Roman', serif;
