@@ -11,6 +11,10 @@
         @if (!Model.Any())
         {
             <p class="no-orders">You have no orders yet 💐</p>
+            <a href="@Url.Action("Catalog","Product")" class="order-details-btn">
+                Start Shopping 🌸
+            </a>
+
         }
         else
         {
