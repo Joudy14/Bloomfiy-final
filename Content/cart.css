@@ -1,25 +1,24 @@
-﻿﻿ /* ========================
+﻿/* ========================
    CART PAGE STYLES
    ======================== */
+
 .cart-page {
-    padding: 150px 20px 70px;
-    padding-top: 120px;
-    padding-bottom: 120px;
-    min-height: 70vh;
+    padding: 150px 20px 70px; 
+    min-height: 70vh; 
     background-color: #f9f7f2;
     color: #5a7c5a;
     font-family: 'Georgia', 'Times New Roman', serif;
 }
 
-.cart-page h2 {
-    padding-top: 120px;
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 40px;
-    color: #8b7355;
-    font-style: italic;
-}
+    .cart-page h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #8b7355;
+        font-style: italic;
+    }
 
+/* Empty Cart Box */
 .cart-empty {
     text-align: center;
     font-size: 1.5rem;
@@ -31,6 +30,7 @@
     margin: 0 auto;
 }
 
+/* Cart Table */
 .cart-table {
     width: 100%;
     border-collapse: collapse;
@@ -40,7 +40,8 @@
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
-    .cart-table th, .cart-table td {
+    .cart-table th,
+    .cart-table td {
         padding: 15px;
         text-align: left;
         border-bottom: 1px solid #e0e0e0;
@@ -57,6 +58,7 @@
         border-bottom: none;
     }
 
+    /* Buttons inside table */
     .cart-table .action-btn {
         background-color: #5a7c5a;
         color: white;
@@ -71,9 +73,10 @@
             background-color: #4a6c4a;
         }
 
+/* Cart Buttons (Checkout, Continue shopping) */
 .cart-buttons {
     margin-top: 40px;
-    margin-bottom: 80px; 
+    margin-bottom: 80px;
     display: flex;
     justify-content: flex-end;
     gap: 15px;
@@ -93,6 +96,7 @@
             background-color: #c19a6b;
         }
 
+/* Product inside cart */
 .cart-img {
     width: 70px;
     height: 70px;
