@@ -79,7 +79,7 @@
                         <a href="@Url.Action("Delete", new { id = product.ProductId })" class="btn-delete">Delete</a>
                         <a href="@Url.Action("ToggleAvailability", new { id = product.ProductId })"
                            class="btn-toggle"
-                           onclick="return confirm('Are you sure?')">
+                           onclick="return confirmToggle(@product.IsAvailable.ToString().ToLower())">
                             @(product.IsAvailable ? "Deactivate" : "Activate")
                         </a>
                     </td>
@@ -88,6 +88,15 @@
         </tbody>
     </table>
 </div>
+<script>
+    function confirmToggle(isAvailable) {
+        if (isAvailable) {
+            return confirm("Are you sure you want to deactivate this product?");
+        } else {
+            return confirm("Are you sure you want to activate this product?");
+        }
+    }
+</script>
 
 <style>
     .admin-header {

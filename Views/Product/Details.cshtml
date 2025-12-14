@@ -364,6 +364,22 @@ $(document).ready(function () {
         return;
     }
 
+    // ✅ Thumbnail click (FIX)
+    $('.thumbnail').on('click', function () {
+
+        let imageUrl = $(this).data('image');
+
+        if (!imageUrl) return;
+
+        // change main image
+        $('#mainProductImage').attr('src', imageUrl);
+
+        // active state
+        $('.thumbnail').removeClass('active');
+        $(this).addClass('active');
+    });
+
+
 // ✅ Add to cart (AJAX – no redirect)
 $('.add-to-cart-btn.large').on('click', function (e) {
     e.preventDefault();
