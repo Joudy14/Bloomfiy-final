@@ -1,4 +1,4 @@
-namespace Bloomfiy_final.Migrations
+﻿namespace Bloomfiy_final.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -19,16 +19,24 @@ namespace Bloomfiy_final.Migrations
             // ---------------- COLORS ----------------
             context.Colors.AddOrUpdate(
                 c => c.ColorName,
-                new Color { ColorName = "Red", IsAvailable = true, ColorCode = "#FF0000" },
-                new Color { ColorName = "Pink", IsAvailable = true, ColorCode = "#FFC0CB" },
-                new Color { ColorName = "White", IsAvailable = true, ColorCode = "#FFFFFF" },
-                new Color { ColorName = "Yellow", IsAvailable = true, ColorCode = "#FFD700" },
 
-                new Color { ColorName = "Orange", IsAvailable = true, ColorCode = "#FFA500" },
-                new Color { ColorName = "Purple", IsAvailable = true, ColorCode = "#800080" },
-                new Color { ColorName = "Blue", IsAvailable = true, ColorCode = "#1E90FF" },
-                new Color { ColorName = "Fuchsia", IsAvailable = true, ColorCode = "#FF00FF" }
+                new Color { ColorName = "Red", IsAvailable = true, ColorCode = "#FF0000", PriceAdjustment = 0m },
+                new Color { ColorName = "Pink", IsAvailable = true, ColorCode = "#FFC0CB", PriceAdjustment = 0m },
+                new Color { ColorName = "White", IsAvailable = true, ColorCode = "#FFFFFF", PriceAdjustment = 0m },
+                new Color { ColorName = "Yellow", IsAvailable = true, ColorCode = "#FFD700", PriceAdjustment = 0m },
+
+                new Color { ColorName = "Orange", IsAvailable = true, ColorCode = "#FFA500", PriceAdjustment = 2m },
+                new Color { ColorName = "Purple", IsAvailable = true, ColorCode = "#800080", PriceAdjustment = 3m },
+                new Color { ColorName = "Blue", IsAvailable = true, ColorCode = "#1E90FF", PriceAdjustment = 2m },
+                new Color { ColorName = "Fuchsia", IsAvailable = true, ColorCode = "#FF00FF", PriceAdjustment = 4m },
+
+                // ⭐ NEW COLORS ⭐
+                new Color { ColorName = "Creamy", IsAvailable = true, ColorCode = "#FFFDD0", PriceAdjustment = 1.5m },
+                new Color { ColorName = "Bluish", IsAvailable = true, ColorCode = "#6CA0DC", PriceAdjustment = 2.5m },
+                new Color { ColorName = "Yellowish", IsAvailable = true, ColorCode = "#FFF176", PriceAdjustment = 1m },
+                new Color { ColorName = "Cherry", IsAvailable = true, ColorCode = "#D2042D", PriceAdjustment = 5m }
             );
+
 
 
 
