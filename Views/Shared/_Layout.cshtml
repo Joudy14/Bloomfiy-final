@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="~/Content/refund.css">
     <link rel="stylesheet" href="~/Content/blog.css">
     <link rel="stylesheet" href="~/Content/event.css" />
-    <link rel="stylesheet" href="~/Content/catalog.css">
+    <link rel="stylesheet" href="~/Content/Catalog.css">
     <link rel="stylesheet" href="~/Content/details.css">
     <link rel="stylesheet" href="~/Content/Profile.css">
     <link rel="stylesheet" href="~/Content/Wishlist.css" />
@@ -71,41 +71,41 @@
                 }
             }
 
-        <div class="user-actions">
-            <!-- Wishlist Icon -->
-            <a href="@Url.Action("Index", "Wishlist")" class="action-icon wishlist-icon" title="Wishlist">
-                ♡
+            <div class="user-actions">
+                <!-- Wishlist Icon -->
+                <a href="@Url.Action("Index", "Wishlist")" class="action-icon wishlist-icon" title="Wishlist">
+                    ♡
 
-            </a>
+                </a>
 
-            <!-- Cart -->
-            <a href="@Url.Action("Index", "Cart")" class="action-icon cart-icon" title="Cart">
-                🛒
-            </a>
-
-
-            @if (Request.IsAuthenticated)
-            {
-                <!-- Account -->
-                <a href="@Url.Action("Index", "Manage")" class="action-icon" title="My Account">👤</a>
-
-                <!-- Logout triggers hidden form -->
-                <a href="javascript:document.getElementById('logoutForm').submit()" class="action-icon" title="Logout">⎋</a>
-            }
-            else
-            {
-                <a href="@Url.Action("Login", "Account")" class="action-icon" title="Login">Login</a>
-                <a href="@Url.Action("Register", "Account")" class="action-icon" title="Register">Register</a>
-            }
-            @if (User.IsInRole("Admin"))
-            {
-                <a href="@Url.Action("Index", "Admin")" class="admin-btn">Admin</a>
-
-            }
+                <!-- Cart -->
+                <a href="@Url.Action("Index", "Cart")" class="action-icon cart-icon" title="Cart">
+                    🛒
+                </a>
 
 
+                @if (Request.IsAuthenticated)
+                {
+                    <!-- Account -->
+                    <a href="@Url.Action("Index", "Manage")" class="action-icon" title="My Account">👤</a>
 
-        </div>
+                    <!-- Logout triggers hidden form -->
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="action-icon" title="Logout">⎋</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")" class="action-icon" title="Login">Login</a>
+                    <a href="@Url.Action("Register", "Account")" class="action-icon" title="Register">Register</a>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="@Url.Action("Index", "Admin")" class="admin-btn">Admin</a>
+
+                }
+
+
+
+            </div>
 
 
 
@@ -173,6 +173,7 @@
     <script src="~/Scripts/blog.js"></script>
     <script src="~/Scripts/event.js"></script>
     <script src="~/Scripts/product-details.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 
 

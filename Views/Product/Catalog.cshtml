@@ -58,74 +58,33 @@
             </div>
 
             <button id="clearFilters" class="clear-btn">Clear Filters</button>
-
+            
         </aside>
 
         <!-- PRODUCTS -->
         <main class="catalog-products">
 
-            <!-- SORT -->
-            <div class="catalog-sort">
-                <select id="sortSelect">
-                    <option value="">Sort by</option>
-                    <option value="name-asc">Name A–Z</option>
-                    <option value="price-asc">Price Low → High</option>
-                    <option value="price-desc">Price High → Low</option>
-                </select>
+            <div class="catalog-toolbar">
+
+                <div class="catalog-search">
+                    <input type="text"
+                           id="searchInput"
+                           placeholder="Search flowers by name…" />
+                </div>
+
+                <div class="catalog-sort">
+                    <select id="sortSelect">
+                        <option value="">Sort by</option>
+                        <option value="name-asc">Name A–Z</option>
+                        <option value="price-asc">Price Low → High</option>
+                        <option value="price-desc">Price High → Low</option>
+                    </select>
+                </div>
+
             </div>
 
             <div class="products-grid" id="productsGrid">
-                @foreach (var product in Model)
-                {
-                    <div class="product-card"
-                         data-product-id="@product.ProductId"
-                         data-category="@product.CategoryId"
-                         data-price="@product.BasePrice"
-                         data-colors="@string.Join(",", product.ProductColors.Select(pc => pc.ColorId))">
-
-
-                        <div class="product-image">
-                            <img src="@product.DefaultImageUrl" alt="@product.Name">
-                            @{
-                                var wishlistIds = ViewBag.WishlistIds as List<int> ?? new List<int>();
-                            }
-
-                        <form class="wishlist-form">
-                            <input type="hidden" name="id" value="@product.ProductId" />
-                            <input type="hidden" name="name" value="@product.Name" />
-                            <input type="hidden" name="price" value="@product.BasePrice" />
-                            <input type="hidden" name="imageUrl" value="@product.DefaultImageUrl" />
-
-                            <button type="submit"
-                                    class="wishlist-btn @(wishlistIds.Contains(product.ProductId) ? "active" : "")">
-                                ♥
-                            </button>
-
-                        </form>
-
-                        </div>
-
-                        <div class="product-info">
-                            <h3>@product.Name</h3>
-
-                            <p>
-                                @(product.Description?.Length > 80
-                                    ? product.Description.Substring(0, 80) + "..."
-                                    : product.Description)
-                            </p>
-
-                            <div class="product-price">
-                                From $@product.BasePrice
-                            </div>
-
-                            <a href="@Url.Action("Details", "Product", new { id = product.ProductId })"
-                               class="view-btn">
-                                View Details
-                            </a>
-                        </div>
-
-                    </div>
-                }
+                @Html.Partial("_ProductGrid", Model)
             </div>
 
         </main>

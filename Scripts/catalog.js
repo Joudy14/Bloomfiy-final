@@ -1,113 +1,88 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿$(document).ready(function () {
 
-    const products = Array.from(document.querySelectorAll(".product-card"));
-    const categoryChecks = document.querySelectorAll(".filter-category");
-    const colorButtons = document.querySelectorAll(".color-filter");
-    const priceSlider = document.getElementById("priceFilter");
-    const priceValue = document.getElementById("priceValue");
-    const clearBtn = document.getElementById("clearFilters");
+    function applyAjaxFilters() {
 
-    // state (SAFE – scoped)
-    let activeCategories = [];
-    let activeColors = [];
-    let maxPrice = priceSlider ? Number(priceSlider.value) : Infinity;
+        const categories = $('.filter-category:checked')
+            .map(function () { return this.value; })
+            .get();
 
-    function applyFilters() {
-        products.forEach(product => {
-            const price = Number(product.dataset.price);
-            const category = product.dataset.category;
-            const colors = product.dataset.colors
-                ? product.dataset.colors.split(",")
-                : [];
+        const colors = $('.color-filter.active')
+            .map(function () { return $(this).data('color'); })
+            .get();
 
-            const categoryMatch =
-                activeCategories.length === 0 ||
-                activeCategories.includes(category);
+        const maxPrice = $('#priceFilter').val();
+        const sort = $('#sortSelect').val();
+        const search = $('#searchInput').val();
 
-            const colorMatch =
-                activeColors.length === 0 ||
-                activeColors.some(c => colors.includes(c));
-
-            const priceMatch = price <= maxPrice;
-
-            product.style.display =
-                categoryMatch && colorMatch && priceMatch
-                    ? "flex"
-                    : "none";
+        $.ajax({
+            url: '/Product/Filter',
+            type: 'GET',
+            traditional: true,
+            data: {
+                categories: categories,
+                colors: colors,
+                maxPrice: maxPrice,
+                sort: sort,
+                search: search
+            },
+            success: function (html) {
+                $('#productsGrid').html(html);
+            },
         });
     }
 
-    // CATEGORY FILTER
-    categoryChecks.forEach(chk => {
-        chk.addEventListener("change", () => {
-            activeCategories = Array.from(categoryChecks)
-                .filter(c => c.checked)
-                .map(c => c.value);
+    // CATEGORY
+    $('.filter-category').on('change', applyAjaxFilters);
 
-            applyFilters();
-        });
+    // COLORS (delegation so it survives AJAX)
+    $(document).on('click', '.color-filter', function () {
+        $(this).toggleClass('active');
+        applyAjaxFilters();
     });
 
-    // COLOR FILTER
-    colorButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const colorId = btn.dataset.color;
-            btn.classList.toggle("active");
-
-            if (activeColors.includes(colorId)) {
-                activeColors = activeColors.filter(c => c !== colorId);
-            } else {
-                activeColors.push(colorId);
-            }
-
-            applyFilters();
-        });
+    // PRICE
+    $('#priceFilter').on('input', function () {
+        $('#priceValue').text(this.value);
+        applyAjaxFilters();
     });
 
-    // PRICE FILTER
-    if (priceSlider) {
-        priceSlider.addEventListener("input", () => {
-            maxPrice = Number(priceSlider.value);
-            if (priceValue) priceValue.textContent = maxPrice;
-            applyFilters();
-        });
-    }
+    // SORT
+    $('#sortSelect').on('change', applyAjaxFilters);
 
-    // CLEAR FILTERS
-    if (clearBtn) {
-        clearBtn.addEventListener("click", () => {
-            activeCategories = [];
-            activeColors = [];
-            maxPrice = priceSlider ? Number(priceSlider.max) : Infinity;
+    // TEXT SEARCH
+    $('#searchInput').on('keyup', applyAjaxFilters);
 
-            categoryChecks.forEach(c => c.checked = false);
-            colorButtons.forEach(c => c.classList.remove("active"));
+    // CLEAR
+    $('#clearFilters').on('click', function () {
+        $('.filter-category').prop('checked', false);
+        $('.color-filter').removeClass('active');
+        $('#priceFilter').val($('#priceFilter').attr('max'));
+        $('#priceValue').text($('#priceFilter').attr('max'));
+        $('#searchInput').val('');
+        applyAjaxFilters();
+    });
 
-            if (priceSlider) priceSlider.value = priceSlider.max;
-            if (priceValue) priceValue.textContent = priceSlider.max;
-
-            applyFilters();
-        });
-    }
-
-    // INIT
-    applyFilters();
 });
 
-document.querySelectorAll('.wishlist-form').forEach(form => {
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
 
-        fetch('/Wishlist/AddAjax', {
-            method: 'POST',
-            body: new FormData(this)
-        })
-            .then(r => r.json())
-            .then(res => {
-                if (res.success) {
-                    this.querySelector('.wishlist-btn')
-                        .classList.toggle('active');
-                }
-            });
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll('.wishlist-form').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            fetch('/Wishlist/AddAjax', {
+                method: 'POST',
+                body: new FormData(this)
+            })
+                .then(r => r.json())
+                .then(res => {
+                    if (res.success) {
+                        this.querySelector('.wishlist-btn')
+                            .classList.toggle('active');
+                    }
+                });
+        });
     });
+
 });

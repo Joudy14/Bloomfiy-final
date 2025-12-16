@@ -29,6 +29,47 @@ namespace Bloomfiy_final.Controllers
             return View(products);
         }
 
+        // GET: Product/Filter (AJAX)
+        public ActionResult Filter(
+            List<int> categories,
+            List<int> colors,
+            decimal maxPrice,
+            string sort,
+            string search)
+        {
+            var products = db.Products
+                .Include(p => p.Category)
+                .Include(p => p.ProductColors.Select(pc => pc.Color))
+                .Where(p => p.IsAvailable && p.BasePrice <= maxPrice);
+
+            if (categories != null && categories.Any())
+                products = products.Where(p => categories.Contains(p.CategoryId));
+
+            if (colors != null && colors.Any())
+                products = products.Where(p =>
+                    p.ProductColors.Any(pc => colors.Contains(pc.ColorId)));
+
+            if (!string.IsNullOrWhiteSpace(search))
+                products = products.Where(p => p.Name.Contains(search));
+
+            switch (sort)
+            {
+                case "name-asc":
+                    products = products.OrderBy(p => p.Name);
+                    break;
+                case "price-asc":
+                    products = products.OrderBy(p => p.BasePrice);
+                    break;
+                case "price-desc":
+                    products = products.OrderByDescending(p => p.BasePrice);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.Name);
+                    break;
+            }
+
+            return PartialView("_ProductGrid", products.ToList());
+        }
 
 
         // GET: Product/Details
