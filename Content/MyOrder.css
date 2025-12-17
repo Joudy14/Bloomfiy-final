@@ -1,11 +1,10 @@
 ﻿/* ===== MY ORDERS PAGE ===== */
 .myorders-section {
-    min-height: calc(100vh - 160px); /* يملأ الشاشة بدون ما يضغط الفوتر */
-    background: #f9f7f2; /* نفس روح الموقع */
+    min-height: calc(100vh - 160px); 
+    background: #f9f7f2;
     padding: 100px 0 120px;
 }
 
-/* العنوان */
 .myorders-title {
     text-align: center;
     font-size: 3rem;

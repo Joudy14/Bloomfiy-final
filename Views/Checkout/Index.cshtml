@@ -71,18 +71,37 @@
 
                 <div class="credit-card-box">
                     <label>Card Number</label>
-                    <input type="text" class="input-field" placeholder="1234 5678 9012 3456" required />
+                    @Html.TextBoxFor(m => m.Input.CardNumber, new
+                    {
+                        @class = "input-field",
+                        placeholder = "1234567812345678",
+                        maxlength = "16"
+                    })
+                    @Html.ValidationMessageFor(m => m.Input.CardNumber)
 
                     <div class="card-row">
                         <div>
                             <label>Expiry</label>
-                            <input type="text" class="input-field" placeholder="MM/YY" required />
+                            @Html.TextBoxFor(m => m.Input.Expiry, new
+                            {
+                                @class = "input-field",
+                                placeholder = "MM/YY"
+                            })
+                            @Html.ValidationMessageFor(m => m.Input.Expiry)
                         </div>
+
                         <div>
                             <label>CVC</label>
-                            <input type="text" class="input-field" placeholder="123" required />
+                            @Html.TextBoxFor(m => m.Input.CVC, new
+                            {
+                                @class = "input-field",
+                                maxlength = "3",
+                                placeholder = "123"
+                            })
+                            @Html.ValidationMessageFor(m => m.Input.CVC)
                         </div>
                     </div>
+
                 </div>
 
                 <button type="submit" class="place-order-btn">

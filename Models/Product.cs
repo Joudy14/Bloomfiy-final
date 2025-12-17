@@ -70,7 +70,7 @@ namespace Bloomfiy_final.Models
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
-        public virtual Categories Category { get; set; } // Note: Categories (plural) not Category}
+        public virtual Categories Category { get; set; } 
 
         [Column("is_available")]
         public bool IsAvailable { get; set; } = true;
@@ -82,7 +82,6 @@ namespace Bloomfiy_final.Models
         [Column("date_created")]
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        // Navigation property for ProductColors
         public virtual ICollection<ProductColor> ProductColors { get; set; }
 
         [NotMapped]

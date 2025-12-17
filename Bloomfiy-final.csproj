@@ -430,8 +430,6 @@
     <Content Include="Views\Admin\AdminCategory\Create.cshtml" />
     <Content Include="Views\Admin\AdminCategory\Edit.cshtml" />
     <Content Include="Views\Admin\AdminCategory\Index.cshtml" />
-    <Content Include="Views\Admin\AdminEvent\BookingDetails.cshtml" />
-    <Content Include="Views\Admin\AdminEvent\Bookings.cshtml" />
     <Content Include="Views\Admin\AdminOrder\Details.cshtml" />
     <Content Include="Views\Admin\AdminOrder\Index.cshtml" />
     <Content Include="Views\Admin\AdminProduct\Create.cshtml" />

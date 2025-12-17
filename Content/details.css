@@ -413,13 +413,11 @@
     position: relative;
 }
 
-/* Pull info image down after full details */
 .info-image-section {
     grid-column: 1 / -1;
     margin-top: 80px;
 }
 
-/* Add divider above About section */
 .product-full-details {
     position: relative;
     padding-top: 60px;
@@ -444,7 +442,7 @@
 
 .info-image-item img.info-image {
     width: 100%;
-    max-width: 1100px; /* ⬅️ controls how big it gets */
+    max-width: 1100px;
     height: auto;
     border-radius: 12px;
 }

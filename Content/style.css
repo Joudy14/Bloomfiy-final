@@ -569,25 +569,25 @@ header nav ul {
 .events-grid {
     display: flex;
     justify-content: center;
-    gap: 40px; /* Space between the circles */
-    flex-wrap: wrap; /* Allows them to stack on smaller screens */
+    gap: 40px;
+    flex-wrap: wrap; 
     margin-top: 50px;
     padding-bottom: 30px;
 }
 
 /* The Circular Cards */
 .event-card {
-    background-color: rgba(255, 255, 255, 0.92); /* Slightly transparent white */
-    width: 320px; /* Width */
-    height: 320px; /* Height must match width to make a perfect circle */
-    border-radius: 50%; /* This makes it a CIRCLE */
+    background-color: rgba(255, 255, 255, 0.92); 
+    width: 320px; 
+    height: 320px; 
+    border-radius: 50%; 
     /* Centering the text inside the circle */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 30px; /* Prevents text from hitting the edges */
+    padding: 30px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Adds a nice shadow */
     transition: transform 0.3s ease, background-color 0.3s;
     cursor: default;
@@ -595,8 +595,8 @@ header nav ul {
 
     /* Hover Effect */
     .event-card:hover {
-        transform: translateY(-10px); /* Moves up slightly when hovered */
-        background-color: #ffffff; /* Becomes solid white */
+        transform: translateY(-10px); 
+        background-color: #ffffff;
     }
 
     /* Typography inside the circles */
